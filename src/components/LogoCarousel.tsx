@@ -21,7 +21,7 @@ export const LogoCarousel = () => {
           </div>
           <span className="text-muted-foreground">
             doanh nghiệp đã chuyển mình cùng{" "}
-            <span className="text-primary font-medium">Base</span>
+            <span className="text-primary font-medium">SOF</span>
           </span>
         </div>
       </div>

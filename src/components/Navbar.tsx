@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, X } from "lucide-react";
+import sofLogo from "@/assets/logo/logo.png";
 
 const navItems = [
   { label: "Sản phẩm", hasDropdown: true },
@@ -19,10 +20,13 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">B</span>
-            </div>
+          <a href="/" className="flex items-center gap-3" aria-label="Trang chủ SOF.VN">
+            <img
+              src={sofLogo}
+              alt="Logo SOF.VN"
+              className="h-9 w-auto rounded-md object-contain"
+              loading="eager"
+            />
             <span className="text-foreground font-bold text-xl">SOF.VN</span>
           </a>
 

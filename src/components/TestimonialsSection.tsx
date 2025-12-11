@@ -9,7 +9,7 @@ const testimonials = [
     company: "Boston Pharma",
     stat: "180%",
     statLabel: "tốc độ xử lí quy trình",
-    quote: "Trước khi sử dụng Base Work+, chúng tôi có những quy trình được tính bằng năm... Base không chỉ là một phần mềm mà còn là một nền tảng để nhân viên phát huy tối đa khả năng sáng tạo của mình.",
+    quote: "Trước khi sử dụng SOF Work+, chúng tôi có những quy trình được tính bằng năm... SOF không chỉ là một phần mềm mà còn là một nền tảng để nhân viên phát huy tối đa khả năng sáng tạo của mình.",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const testimonials = [
     company: "Intro Art",
     stat: "70%",
     statLabel: "doanh thu tăng trưởng hằng năm",
-    quote: "Trong 3 năm dùng Base, Intro Art ghi nhận doanh thu tăng trưởng 60-70%/năm, hiệu suất của nhân viên tăng 3-4 lần, các chi phí in ấn giấy tờ duyệt nội bộ giảm đáng kể.",
+    quote: "Trong 3 năm dùng SOF, Intro Art ghi nhận doanh thu tăng trưởng 60-70%/năm, hiệu suất của nhân viên tăng 3-4 lần, các chi phí in ấn giấy tờ duyệt nội bộ giảm đáng kể.",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const testimonials = [
     company: "Vietjet Air",
     stat: "100+",
     statLabel: "quy trình vận hành được số hóa",
-    quote: "Hệ thống Base đã giúp chúng tôi đưa tất cả các quy trình nội bộ lên trực tuyến trên một nền tảng số, từ đó cải thiện đáng kể tốc độ và hiệu quả của các quy trình nội bộ.",
+    quote: "Hệ thống SOF đã giúp chúng tôi đưa tất cả các quy trình nội bộ lên trực tuyến trên một nền tảng số, từ đó cải thiện đáng kể tốc độ và hiệu quả của các quy trình nội bộ.",
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ const testimonials = [
     company: "247 Express",
     stat: "200+",
     statLabel: "bưu cục được số hóa & kết nối",
-    quote: "Khi tất cả thông tin đưa lên hệ thống, công việc được thực hiện trên Base Workflow rất trơn tru với tiến độ được nắm rõ. Tôi có thể dựa vào đó để đưa ra quyết định hoặc can thiệp kịp thời.",
+    quote: "Khi tất cả thông tin đưa lên hệ thống, công việc được thực hiện trên SOF Workflow rất trơn tru với tiến độ được nắm rõ. Tôi có thể dựa vào đó để đưa ra quyết định hoặc can thiệp kịp thời.",
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ const testimonials = [
     company: "Nệm Thuần Việt",
     stat: "x3",
     statLabel: "tốc độ xử lý thanh toán",
-    quote: "Với Base, mỗi nhân sự đều có thể tự quản lý hiệu suất làm việc, phối hợp nhịp nhàng với đồng đội để đạt được mục tiêu chung.",
+    quote: "Với SOF, mỗi nhân sự đều có thể tự quản lý hiệu suất làm việc, phối hợp nhịp nhàng với đồng đội để đạt được mục tiêu chung.",
   },
 ];
 
@@ -70,7 +70,7 @@ export const TestimonialsSection = () => {
           <h2 className="text-3xl lg:text-4xl font-bold">
             <span className="text-gradient">10,000+</span> doanh nghiệp Việt{" "}
             <br className="hidden sm:block" />
-            đã chuyển mình cùng Base
+            đã chuyển mình cùng SOFVN
           </h2>
         </div>
 

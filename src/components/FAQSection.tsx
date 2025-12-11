@@ -3,24 +3,24 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Tôi có thể dùng Base mà không cần trả phí không?",
-    answer: "Base cung cấp gói dùng thử miễn phí 14 ngày để bạn trải nghiệm đầy đủ các tính năng. Sau thời gian dùng thử, bạn có thể chọn gói phù hợp với nhu cầu của doanh nghiệp.",
+    question: "Tôi có thể dùng SOF mà không cần trả phí không?",
+    answer: "SOF cung cấp gói dùng thử miễn phí 14 ngày để bạn trải nghiệm đầy đủ các tính năng. Sau thời gian dùng thử, bạn có thể chọn gói phù hợp với nhu cầu của doanh nghiệp.",
   },
   {
-    question: "Base có hỗ trợ tích hợp với các hệ thống ERP không?",
-    answer: "Có, Base có khả năng tích hợp với hơn 200 ứng dụng phổ biến bao gồm các hệ thống ERP như SAP, Oracle, và nhiều phần mềm khác thông qua API.",
+    question: "SOF có hỗ trợ tích hợp với các hệ thống ERP không?",
+    answer: "Có, SOF có khả năng tích hợp với hơn 200 ứng dụng phổ biến bao gồm các hệ thống ERP như SAP, Oracle, và nhiều phần mềm khác thông qua API.",
   },
   {
     question: "Dữ liệu của doanh nghiệp được bảo mật như thế nào?",
-    answer: "Base được chứng nhận ISO 27001 về bảo mật thông tin. Tất cả dữ liệu được mã hóa và lưu trữ trên các máy chủ đạt tiêu chuẩn quốc tế.",
+    answer: "SOF được chứng nhận ISO 27001 về bảo mật thông tin. Tất cả dữ liệu được mã hóa và lưu trữ trên các máy chủ đạt tiêu chuẩn quốc tế.",
   },
   {
-    question: "Thời gian triển khai Base mất bao lâu?",
+    question: "Thời gian triển khai SOF mất bao lâu?",
     answer: "Thời gian triển khai phụ thuộc vào quy mô và độ phức tạp của doanh nghiệp. Thông thường, việc triển khai cơ bản mất từ 2-4 tuần, còn triển khai toàn diện có thể từ 1-3 tháng.",
   },
   {
-    question: "Base có hỗ trợ đào tạo nhân viên sử dụng không?",
-    answer: "Có, Base cung cấp dịch vụ đào tạo toàn diện cho nhân viên bao gồm đào tạo trực tiếp, video hướng dẫn, tài liệu và hỗ trợ 24/7.",
+    question: "SOF có hỗ trợ đào tạo nhân viên sử dụng không?",
+    answer: "Có, SOF cung cấp dịch vụ đào tạo toàn diện cho nhân viên bao gồm đào tạo trực tiếp, video hướng dẫn, tài liệu và hỗ trợ 24/7.",
   },
 ];
 
@@ -34,7 +34,7 @@ export const FAQSection = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Hỏi đáp cùng <span className="text-gradient">Base</span>
+              Hỏi đáp cùng <span className="text-gradient">SOF</span>
             </h2>
             <p className="text-muted-foreground">
               Chúng tôi đã tổng hợp những câu hỏi thường gặp nhất từ khách hàng.{" "}

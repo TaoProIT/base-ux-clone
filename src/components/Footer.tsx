@@ -1,4 +1,5 @@
-import { Mail, Phone, MapPin, Facebook, Youtube, Linkedin } from "lucide-react";
+import { Mail, MapPin, Facebook, Youtube, Linkedin } from "lucide-react";
+import sofLogo from "@/assets/logo/logo.png";
 
 const footerLinks = {
   congty: {
@@ -14,21 +15,21 @@ const footerLinks = {
   bosanpham: {
     title: "Bộ sản phẩm",
     links: [
-      { label: "Base Work+", href: "#" },
-      { label: "Base HRM+", href: "#" },
-      { label: "Base CRM", href: "#" },
-      { label: "Base Finance+", href: "#" },
-      { label: "Base Info+", href: "#" },
+      { label: "SOF Work+", href: "#" },
+      { label: "SOF HRM+", href: "#" },
+      { label: "SOF CRM", href: "#" },
+      { label: "SOF Finance+", href: "#" },
+      { label: "SOF Info+", href: "#" },
     ],
   },
   sanpham: {
     title: "Sản phẩm",
     links: [
-      { label: "Base XSpace", href: "#" },
-      { label: "Base Workflow", href: "#" },
-      { label: "Base Request", href: "#" },
-      { label: "Base Schedule", href: "#" },
-      { label: "Base Finance", href: "#" },
+      { label: "SOF XSpace", href: "#" },
+      { label: "SOF Workflow", href: "#" },
+      { label: "SOF Request", href: "#" },
+      { label: "SOF Schedule", href: "#" },
+      { label: "SOF Finance", href: "#" },
     ],
   },
   giaiphap: {
@@ -70,7 +71,7 @@ const offices = [
   {
     location: "VP. HCM:",
     phone: "(+84) 896 69 1313",
-    address: "Tầng 2, Tòa Jasmine 1, Hà Đô Centrosa Garden, 200 Đường 3/2, Phường Hòa Hưng, TP.HCM",
+    address: "69/9 đường D9, Tây Thạnh, Tân Phú, TP. Hồ Chí Minh",
   },
   {
     location: "VP. Đà Nẵng:",
@@ -132,14 +133,18 @@ export const Footer = () => {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             {/* Logo and Company */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-              <a href="/" className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">B</span>
-                </div>
+              <a href="/" className="flex items-center gap-3" aria-label="Trang chủ SOF.VN">
+                <img
+                  src={sofLogo}
+                  alt="Logo SOF.VN"
+                  className="h-9 w-auto rounded-md object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <span className="text-foreground font-bold text-xl">SOF.VN</span>
               </a>
               <span className="text-sm text-muted-foreground">
-                Công ty cổ phần Base Enterprise
+                Công ty TNHH SOFVN
               </span>
             </div>
 
@@ -162,7 +167,7 @@ export const Footer = () => {
 
             {/* App Download */}
             <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground">Base đã có mặt trên:</span>
+              <span className="text-sm text-muted-foreground">SOFVN đã có mặt trên:</span>
               <a
                 href="#"
                 className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
@@ -194,7 +199,7 @@ export const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            Base © 2017 All Rights reserved
+            SOFVN © 2017 All Rights reserved
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-sm text-primary hover:underline">

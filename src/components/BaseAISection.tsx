@@ -24,7 +24,7 @@ export const BaseAISection = () => {
           </h2>
           <Button variant="hero" className="mt-4">
             <Sparkles className="w-4 h-4 mr-2" />
-            Base AI Coming Soon
+            SOF AI Coming Soon
           </Button>
         </div>
 
@@ -37,7 +37,7 @@ export const BaseAISection = () => {
                 <Sparkles className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
-                <div className="font-semibold text-foreground">Hey Base AI</div>
+                <div className="font-semibold text-foreground">Hey SOF AI</div>
                 <div className="text-xs text-muted-foreground">Trợ lý AI thông minh</div>
               </div>
             </div>
@@ -70,7 +70,7 @@ export const BaseAISection = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
                 <input
                   type="text"
-                  placeholder="Hỏi Base AI bất cứ điều gì..."
+                  placeholder="Hỏi SOF AI bất cứ điều gì..."
                   className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none"
                 />
                 <Button variant="hero" size="sm">

@@ -173,7 +173,7 @@ export const IndustriesSection = () => {
 
             {/* Clients */}
             <div className="pt-4">
-              <div className="text-sm text-muted-foreground mb-3">Khách hàng của Base</div>
+              <div className="text-sm text-muted-foreground mb-3">Khách hàng của SOF</div>
               <div className="flex flex-wrap gap-3">
                 {activeIndustry.clients.map((client) => (
                   <div

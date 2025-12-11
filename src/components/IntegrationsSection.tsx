@@ -21,7 +21,7 @@ export const IntegrationsSection = () => {
             ứng dụng trên một nền tảng duy nhất
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto mt-4">
-            Base có khả năng kết nối, trao đổi dữ liệu với các ứng dụng phổ biến mà doanh nghiệp của bạn đang sử dụng
+            SOF có khả năng kết nối, trao đổi dữ liệu với các ứng dụng phổ biến mà doanh nghiệp của bạn đang sử dụng
           </p>
         </div>
 

@@ -9,10 +9,10 @@ export const BlogSection = () => {
           {/* Content */}
           <div className="space-y-4">
             <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
-              Đọc thêm về Base
+              Đọc thêm về SOF
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Hiểu thêm về cách vận hành Base vào doanh nghiệp của bạn. 
+              Hiểu thêm về cách vận hành SOF vào doanh nghiệp của bạn. 
               Chúng tôi có rất nhiều use case và case study cho bạn tham khảo.
             </p>
             <Button variant="hero" className="group">

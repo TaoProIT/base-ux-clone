@@ -18,7 +18,7 @@ export const CTASection = () => {
           </h2>
           
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Không chỉ là phần mềm, Base cung cấp giải pháp, tri thức & sự đồng hành cùng doanh nghiệp
+            Không chỉ là phần mềm, SOF cung cấp giải pháp, tri thức & sự đồng hành cùng doanh nghiệp
           </p>
 
           <Button variant="hero" size="xl" className="group">
