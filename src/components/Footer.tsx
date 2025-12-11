@@ -136,7 +136,7 @@ export const Footer = () => {
                 <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
                   <span className="text-primary-foreground font-bold text-sm">B</span>
                 </div>
-                <span className="text-foreground font-bold text-xl">BASE.VN</span>
+                <span className="text-foreground font-bold text-xl">SOF.VN</span>
               </a>
               <span className="text-sm text-muted-foreground">
                 Công ty cổ phần Base Enterprise
@@ -209,11 +209,11 @@ export const Footer = () => {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:contact@base.vn"
+              href="mailto:contact@SOF.VN"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Mail className="w-4 h-4" />
-              contact@base.vn
+              contact@SOF.VN
             </a>
             <div className="flex items-center gap-2">
               <a

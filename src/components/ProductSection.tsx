@@ -9,7 +9,7 @@ import {
 const products = [
   {
     id: "work",
-    title: "BASE WORK+",
+    title: "SOF WORK+",
     headline: "Quản trị công việc thông minh, kết nối các phòng ban hiệu quả",
     features: [
       "Giao việc và theo dõi tiến độ theo phòng ban, dự án",
@@ -27,7 +27,7 @@ const products = [
   },
   {
     id: "hrm",
-    title: "BASE HRM+",
+    title: "SOF HRM+",
     headline: "Kiến tạo trải nghiệm nhân sự hạnh phúc",
     features: [
       "Thu hút, tuyển dụng, và giữ chân nhân tài",
@@ -45,7 +45,7 @@ const products = [
   },
   {
     id: "info",
-    title: "BASE INFO+",
+    title: "SOF INFO+",
     headline: "Thông tin rõ ràng, văn hoá doanh nghiệp minh bạch",
     features: [
       "Xây dựng văn hóa, gắn kết nội bộ",
@@ -63,7 +63,7 @@ const products = [
   },
   {
     id: "finance",
-    title: "BASE FINANCE+",
+    title: "SOF FINANCE+",
     headline: "Quản trị tài chính thời gian thực",
     features: [
       "Quản trị chi phí và doanh thu theo thời gian thực",
@@ -81,7 +81,7 @@ const products = [
   },
   {
     id: "crm",
-    title: "BASE CRM",
+    title: "SOF CRM",
     headline: "Đồng bộ hành trình khách hàng, từ bán hàng đến hậu mãi",
     features: [
       "Quản lý pipeline và sản phẩm dễ dàng",

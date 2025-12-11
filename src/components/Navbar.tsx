@@ -23,7 +23,7 @@ export const Navbar = () => {
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">B</span>
             </div>
-            <span className="text-foreground font-bold text-xl">BASE.VN</span>
+            <span className="text-foreground font-bold text-xl">SOF.VN</span>
           </a>
 
           {/* Desktop Navigation */}
