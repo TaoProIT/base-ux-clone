@@ -199,7 +199,7 @@ export const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 pt-6 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            SOFVN © 2017 All Rights reserved
+            SOFVN © 2011 All Rights reserved
           </p>
           <div className="flex items-center gap-4">
             <a href="#" className="text-sm text-primary hover:underline">
@@ -214,11 +214,11 @@ export const Footer = () => {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="mailto:contact@SOF.VN"
+              href="mailto:cskh@sof.vn"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <Mail className="w-4 h-4" />
-              contact@SOF.VN
+              cskh@sof.vn
             </a>
             <div className="flex items-center gap-2">
               <a

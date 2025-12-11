@@ -2,18 +2,20 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, X } from "lucide-react";
 import sofLogo from "@/assets/logo/logo.png";
+import { ProductDropdown } from "./ProductDropdown";
 
 const navItems = [
-  { label: "Sản phẩm", hasDropdown: true },
-  { label: "Giải pháp & Giá", hasDropdown: true },
-  { label: "Lĩnh vực", hasDropdown: true },
-  { label: "Tin tức", hasDropdown: true },
-  { label: "Khách hàng", hasDropdown: false },
-  { label: "Về chúng tôi", hasDropdown: false },
+  { label: "Sản phẩm", hasDropdown: true, id: "product" },
+  { label: "Giải pháp & Giá", hasDropdown: true, id: "solutions" },
+  { label: "Lĩnh vực", hasDropdown: true, id: "industries" },
+  { label: "Tin tức", hasDropdown: true, id: "news" },
+  { label: "Khách hàng", hasDropdown: false, id: "customers" },
+  { label: "Về chúng tôi", hasDropdown: false, id: "about" },
 ];
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
@@ -37,6 +39,11 @@ export const Navbar = () => {
                 key={item.label}
                 variant="nav"
                 className="flex items-center gap-1 px-3"
+                onClick={() => {
+                  if (item.hasDropdown) {
+                    setActiveDropdown(activeDropdown === item.id ? null : item.id);
+                  }
+                }}
               >
                 {item.label}
                 {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
@@ -63,6 +70,12 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {/* Product Dropdown */}
+      <ProductDropdown 
+        isOpen={activeDropdown === "product"} 
+        onClose={() => setActiveDropdown(null)} 
+      />
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
