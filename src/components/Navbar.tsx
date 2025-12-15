@@ -21,18 +21,18 @@ export const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#f4fbff] backdrop-blur-xl border-b-[3px] border-[#8fc0db] shadow-sm">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-[70px]">
           {/* Logo */}
           <a href="/" className="flex items-center gap-3" aria-label="Trang chủ SOF.VN">
             <img
               src={sofLogo}
               alt="Logo SOF.VN"
-              className="h-9 w-auto rounded-md object-contain"
+              className="h-10 w-auto rounded-md object-contain"
               loading="eager"
             />
-            <span className="text-foreground font-bold text-xl">SOF.VN</span>
+            <span className="text-[#0f426c] font-bold text-xl">SOF.VN</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -41,7 +41,7 @@ export const Navbar = () => {
               <Button
                 key={item.label}
                 variant="nav"
-                className="flex items-center gap-1 px-3"
+                className="flex items-center gap-1 px-3 text-[#0f426c] hover:text-[#3087fe] font-medium"
                 onClick={() => {
                   if (item.hasDropdown) {
                     setActiveDropdown(activeDropdown === item.id ? null : item.id);
@@ -56,7 +56,7 @@ export const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+            <Button variant="ghost" className="text-[#507588] hover:text-[#0f426c]">
               Đăng nhập
             </Button>
             <Button variant="hero" size="default">
@@ -66,7 +66,7 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-[#0f426c]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -94,19 +94,19 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border">
+        <div className="lg:hidden bg-white border-t border-[#8fc0db]">
           <div className="container mx-auto px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.label}
-                className="w-full flex items-center justify-between py-3 px-4 text-foreground hover:bg-secondary rounded-lg transition-colors"
+                className="w-full flex items-center justify-between py-3 px-4 text-[#0f426c] hover:bg-[#c3e8ff] rounded-lg transition-colors"
               >
                 {item.label}
                 {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
               </button>
             ))}
             <div className="pt-4 space-y-2">
-              <Button variant="ghost" className="w-full justify-center">
+              <Button variant="ghost" className="w-full justify-center text-[#507588]">
                 Đăng nhập
               </Button>
               <Button variant="hero" className="w-full justify-center">

@@ -105,13 +105,13 @@ export const IndustriesSection = () => {
   const [activeIndustry, setActiveIndustry] = useState(industries[0]);
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
+    <section className="py-20 lg:py-32 relative overflow-hidden bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="text-gradient">Linh hoạt đáp ứng</span>{" "}
-            <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
+            <span className="text-[#3087fe]">Linh hoạt đáp ứng</span>{" "}
+            <span className="px-3 py-1 rounded-full bg-[#0f426c]/10 border border-[#0f426c]/30 text-[#0f426c]">
               60+
             </span>{" "}
             lĩnh vực trên một nền tảng duy nhất
@@ -126,8 +126,8 @@ export const IndustriesSection = () => {
               onClick={() => setActiveIndustry(industry)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
                 activeIndustry.id === industry.id
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                  ? "bg-[#0f426c] text-white"
+                  : "bg-[#f4fbff] border border-[#a7d5ec] text-[#507588] hover:text-[#0f426c] hover:bg-[#c3e8ff]"
               }`}
             >
               <industry.icon className="w-4 h-4" />
@@ -140,15 +140,15 @@ export const IndustriesSection = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Visual */}
           <div className="relative order-2 lg:order-1">
-            <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl" />
-            <div className="relative glass-card rounded-2xl p-6 lg:p-8 aspect-video flex items-center justify-center">
-              <activeIndustry.icon className="w-32 h-32 text-primary/30" />
+            <div className="absolute -inset-4 bg-[#0f426c]/10 rounded-3xl blur-2xl" />
+            <div className="relative bg-[#f4fbff] border border-[#a7d5ec] rounded-2xl p-6 lg:p-8 aspect-video flex items-center justify-center">
+              <activeIndustry.icon className="w-32 h-32 text-[#8fc0db]" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-primary flex items-center justify-center">
-                    <activeIndustry.icon className="w-10 h-10 text-primary-foreground" />
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#0f426c] flex items-center justify-center">
+                    <activeIndustry.icon className="w-10 h-10 text-white" />
                   </div>
-                  <div className="text-xl font-bold text-foreground">{activeIndustry.title}</div>
+                  <div className="text-xl font-bold text-[#0f426c]">{activeIndustry.title}</div>
                 </div>
               </div>
             </div>
@@ -156,15 +156,15 @@ export const IndustriesSection = () => {
 
           {/* Content */}
           <div className="space-y-6 order-1 lg:order-2">
-            <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
+            <h3 className="text-2xl lg:text-3xl font-bold text-[#0f426c]">
               {activeIndustry.title}
             </h3>
 
             <ul className="space-y-4">
               {activeIndustry.features.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3 text-muted-foreground">
-                  <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="w-2 h-2 rounded-full bg-primary" />
+                <li key={index} className="flex items-start gap-3 text-[#507588]">
+                  <span className="w-6 h-6 rounded-full bg-[#0f426c]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="w-2 h-2 rounded-full bg-[#0f426c]" />
                   </span>
                   {feature}
                 </li>
@@ -173,12 +173,12 @@ export const IndustriesSection = () => {
 
             {/* Clients */}
             <div className="pt-4">
-              <div className="text-sm text-muted-foreground mb-3">Khách hàng của SOF</div>
+              <div className="text-sm text-[#507588] mb-3">Khách hàng của SOF</div>
               <div className="flex flex-wrap gap-3">
                 {activeIndustry.clients.map((client) => (
                   <div
                     key={client}
-                    className="px-4 py-2 bg-secondary rounded-lg text-sm text-foreground font-medium"
+                    className="px-4 py-2 bg-[#f4fbff] border border-[#a7d5ec] rounded-lg text-sm text-[#0f426c] font-medium"
                   >
                     {client}
                   </div>

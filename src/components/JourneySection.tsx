@@ -37,11 +37,11 @@ export const JourneySection = () => {
   const [activeStep, setActiveStep] = useState(journeySteps[0]);
 
   return (
-    <section className="py-20 lg:py-32 relative">
+    <section className="py-20 lg:py-32 relative bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
             Đồng hành cùng doanh nghiệp{" "}
             <br className="hidden sm:block" />
             xuyên suốt lộ trình chuyển đổi số
@@ -61,8 +61,8 @@ export const JourneySection = () => {
                 onClick={() => setActiveStep(step)}
                 className={`w-full text-left p-4 lg:p-6 rounded-2xl transition-all duration-300 ${
                   activeStep.id === step.id
-                    ? "glass-card glow-card"
-                    : "bg-secondary/30 hover:bg-secondary/50"
+                    ? "bg-white shadow-lg border border-[#a7d5ec]"
+                    : "bg-[#f4fbff] border border-[#a7d5ec] hover:bg-[#c3e8ff]"
                 }`}
               >
                 <div className="flex items-center gap-4">
@@ -73,13 +73,13 @@ export const JourneySection = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <step.icon className={`w-5 h-5 ${activeStep.id === step.id ? "text-primary" : "text-muted-foreground"}`} />
-                      <span className={`font-semibold ${activeStep.id === step.id ? "text-foreground" : "text-muted-foreground"}`}>
+                      <step.icon className={`w-5 h-5 ${activeStep.id === step.id ? "text-[#0f426c]" : "text-[#507588]"}`} />
+                      <span className={`font-semibold ${activeStep.id === step.id ? "text-[#0f426c]" : "text-[#507588]"}`}>
                         {step.title}
                       </span>
                     </div>
                     {activeStep.id === step.id && (
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                      <p className="text-sm text-[#507588] leading-relaxed mt-2">
                         {step.description}
                       </p>
                     )}
@@ -92,18 +92,18 @@ export const JourneySection = () => {
           {/* Visual */}
           <div className="relative">
             <div className={`absolute -inset-4 bg-gradient-to-r ${activeStep.gradient} opacity-20 rounded-3xl blur-2xl`} />
-            <div className="relative glass-card rounded-2xl p-8 aspect-square flex items-center justify-center">
+            <div className="relative bg-[#f4fbff] border border-[#a7d5ec] rounded-2xl p-8 aspect-square flex items-center justify-center">
               <div className="text-center">
                 <div className={`w-24 h-24 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${activeStep.gradient} flex items-center justify-center`}>
                   <activeStep.icon className="w-12 h-12 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-foreground mb-2">
+                <div className="text-3xl font-bold text-[#0f426c] mb-2">
                   Bước {activeStep.id}
                 </div>
-                <div className="text-xl text-primary font-semibold mb-4">
+                <div className="text-xl text-[#3087fe] font-semibold mb-4">
                   {activeStep.title}
                 </div>
-                <p className="text-muted-foreground max-w-sm mx-auto">
+                <p className="text-[#507588] max-w-sm mx-auto">
                   {activeStep.description}
                 </p>
               </div>

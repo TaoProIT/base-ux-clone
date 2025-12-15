@@ -11,15 +11,14 @@ const aiQuestions = [
 
 export const BaseAISection = () => {
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
+    <section className="py-20 lg:py-32 relative overflow-hidden bg-[#f4fbff]">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-50" />
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#0f426c]/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
             Thông tin tức thời, quyết định chính xác
           </h2>
           <Button variant="hero" className="mt-4">
@@ -30,15 +29,15 @@ export const BaseAISection = () => {
 
         {/* AI Chat Interface */}
         <div className="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-          <div className="glass-card rounded-2xl p-6 lg:p-8">
+          <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-lg border border-[#a7d5ec]">
             {/* Chat Header */}
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border/50">
-              <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#a7d5ec]">
+              <div className="w-10 h-10 rounded-full bg-[#0f426c] flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
-                <div className="font-semibold text-foreground">Hey SOF AI</div>
-                <div className="text-xs text-muted-foreground">Trợ lý AI thông minh</div>
+                <div className="font-semibold text-[#0f426c]">Hey SOF AI</div>
+                <div className="text-xs text-[#507588]">Trợ lý AI thông minh</div>
               </div>
             </div>
 
@@ -49,31 +48,31 @@ export const BaseAISection = () => {
                   key={index}
                   data-aos="fade-left"
                   data-aos-delay={index * 40}
-                  className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors cursor-pointer group"
+                  className="flex items-start gap-3 p-3 rounded-xl bg-[#f4fbff] hover:bg-[#c3e8ff] transition-colors cursor-pointer group border border-[#a7d5ec]"
                 >
-                  <div className="w-8 h-8 rounded-full bg-card flex items-center justify-center flex-shrink-0">
-                    <User className="w-4 h-4 text-muted-foreground" />
+                  <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <User className="w-4 h-4 text-[#507588]" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-foreground group-hover:text-primary transition-colors">
+                    <p className="text-[#0f426c] group-hover:text-[#3087fe] transition-colors">
                       {question}
                     </p>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MessageCircle className="w-4 h-4 text-primary" />
+                  <div className="w-8 h-8 rounded-full bg-[#0f426c]/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <MessageCircle className="w-4 h-4 text-[#0f426c]" />
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Input */}
-            <div className="mt-6 pt-4 border-t border-border/50">
-              <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/30 border border-border/50">
-                <Sparkles className="w-5 h-5 text-primary" />
+            <div className="mt-6 pt-4 border-t border-[#a7d5ec]">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-[#f4fbff] border border-[#a7d5ec]">
+                <Sparkles className="w-5 h-5 text-[#0f426c]" />
                 <input
                   type="text"
                   placeholder="Hỏi SOF AI bất cứ điều gì..."
-                  className="flex-1 bg-transparent text-foreground placeholder:text-muted-foreground outline-none"
+                  className="flex-1 bg-transparent text-[#0f426c] placeholder:text-[#507588] outline-none"
                 />
                 <Button variant="hero" size="sm">
                   Gửi

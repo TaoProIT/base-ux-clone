@@ -1,33 +1,19 @@
 import {
-  Briefcase,
-  Workflow,
-  Settings,
-  Users,
-  DollarSign,
-  Calendar,
-  Target,
-  Gift,
-  User,
-  Package,
-  TrendingUp,
   ShoppingCart,
-  BarChart3,
+  Store,
+  Package,
+  Coffee,
+  Utensils,
+  Hotel,
+  Users,
+  Truck,
+  Warehouse,
+  Car,
   Building2,
-  FileText,
-  Wallet,
-  Database,
-  FileSignature,
-  HardDrive,
-  Lock,
-  Grid3x3,
+  Pill,
   MessageSquare,
+  Lock,
   LayoutGrid,
-  Award,
-  Video,
-  Mail,
-  Headphones,
-  ClipboardList,
-  Clock,
 } from "lucide-react";
 
 interface ProductDropdownProps {
@@ -50,417 +36,197 @@ export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
       <div className="fixed left-0 right-0 z-50 mt-0 top-16 lg:top-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div 
-            className="border border-gray-200 rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
+            className="border border-[#a7d5ec] rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
             style={{ 
-              backgroundColor: '#f8f9fb',
-              height: '682px'
+              backgroundColor: '#f4fbff',
+              maxHeight: '600px'
             }}
           >
-            <div className="h-full p-5">
-              <div className="grid grid-cols-[1fr_256px] gap-5 h-full">
-                {/* Left side - Product sections */}
-                <div className="flex flex-col overflow-y-auto pr-2">
-                  {/* Row 1: SOF WORK+ and SOF INFO+ */}
-                  <div className="grid grid-cols-2 gap-x-6">
-                    {/* SOF WORK+ */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-blue-500">
-                        <h3 className="text-blue-600 font-bold text-xs tracking-wide">SOF WORK+</h3>
-                        <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1">
-                          Tìm hiểu thêm <span>→</span>
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
-                            <span className="text-orange-500 font-bold text-sm">W</span>
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Wework</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý công việc và dự án</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <ClipboardList className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Request</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý phê duyệt</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Workflow className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Workflow</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý và tự động hoá quy trình</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <LayoutGrid className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF XSpace</div>
-                            <div className="text-xs text-gray-500 truncate">Không gian số</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                            <Headphones className="w-4 h-4 text-purple-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Service</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý dịch vụ nội bộ</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
+            {/* GIAO DIỆN MỚI - BỐ CỤC CARDS */}
+            <div className="p-8">
+              {/* Header */}
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-2">
+                  Giải Pháp Phần Mềm SOF
+                </h2>
+                <p className="text-sm text-gray-600">Chọn phần mềm phù hợp với ngành nghề của bạn</p>
+              </div>
 
-                    {/* SOF INFO+ */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-green-500">
-                        <h3 className="text-green-600 font-bold text-xs tracking-wide">SOF INFO+</h3>
-                        <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1">
-                          Tìm hiểu thêm <span>→</span>
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
-                            <Video className="w-4 h-4 text-red-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Meeting</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý cuộc họp</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <Building2 className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Office</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý & ban hành văn bản</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                            <Users className="w-4 h-4 text-purple-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Inside</div>
-                            <div className="text-xs text-gray-500 truncate">Mạng xã hội nội bộ</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Mail className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Message</div>
-                            <div className="text-xs text-gray-500 truncate">Chat & Trao đổi thông tin nội bộ</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <LayoutGrid className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Square</div>
-                            <div className="text-xs text-gray-500 truncate">Quản trị tri thức nội bộ</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
+              {/* Grid 4 cột - Bố cục mới */}
+              <div className="grid grid-cols-4 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50">
+                {/* Card 1: Bán hàng */}
+                <a href="http://sof.vn/vi/Phan-mem/23/Phan-mem-quan-ly-ban-hang.html" 
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <ShoppingCart className="w-6 h-6 text-white" />
                   </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bán hàng</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Quản lý bán hàng chuyên nghiệp</p>
+                </a>
 
-                  {/* Row 2: SOF HRM+ and SOF CRM */}
-                  <div className="grid grid-cols-2 gap-x-6 mt-3">
-                    {/* SOF HRM+ */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-blue-500">
-                        <h3 className="text-blue-600 font-bold text-xs tracking-wide">SOF HRM+</h3>
-                        <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1">
-                          Tìm hiểu thêm <span>→</span>
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Users className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF E-Hiring</div>
-                            <div className="text-xs text-gray-500 truncate">Quản trị tuyển dụng</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Users className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF HRM</div>
-                            <div className="text-xs text-gray-500 truncate">Quản trị & phát triển nhân sự</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <DollarSign className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Payroll</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý & tính lương tự động</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Clock className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Schedule</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý & tính toán ngày công</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <Award className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Review</div>
-                            <div className="text-xs text-gray-500 truncate">Đánh giá nhân sự</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Target className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Goal</div>
-                            <div className="text-xs text-gray-500 truncate">Quản trị mục tiêu</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <User className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Me</div>
-                            <div className="text-xs text-gray-500 truncate">Cổng thông tin cho nhân viên</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <Gift className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Reward</div>
-                            <div className="text-xs text-gray-500 truncate">Ghi nhận thành tích & vinh danh...</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* SOF CRM */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-green-500">
-                        <h3 className="text-green-600 font-bold text-xs tracking-wide">SOF CRM</h3>
-                        <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1">
-                          Tìm hiểu thêm <span>→</span>
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <Settings className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">Service</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý dịch vụ</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                            <DollarSign className="w-4 h-4 text-yellow-600" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">Sales</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý bán hàng</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <BarChart3 className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">Marketing</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý Marketing</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                            <Package className="w-4 h-4 text-yellow-600" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">Product</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý sản phẩm</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
+                {/* Card 2: Siêu thị */}
+                <a href="http://sof.vn/vi/Phan-mem/79/Phan-mem-quan-ly-sieu-thi-.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Store className="w-6 h-6 text-white" />
                   </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Siêu thị</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Giải pháp siêu thị mini</p>
+                </a>
 
-                  {/* Row 3: SOF FINANCE+ and SOF PLATFORM+ */}
-                  <div className="grid grid-cols-2 gap-x-6 mt-3 pt-3 border-t border-gray-200">
-                    {/* SOF FINANCE+ */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-blue-500">
-                        <h3 className="text-blue-600 font-bold text-xs tracking-wide">SOF FINANCE+</h3>
-                        <button className="text-xs text-gray-400 hover:text-blue-500 flex items-center gap-1">
-                          Tìm hiểu thêm <span>→</span>
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Package className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Asset</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý tài sản doanh nghiệp</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <Wallet className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Finance</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý tài chính</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <TrendingUp className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Expense</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý chi phí</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <DollarSign className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Income</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý doanh thu</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                            <Database className="w-4 h-4 text-green-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Bankfeeds</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý đối soát ngân hàng</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* SOF PLATFORM+ */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2 pb-1.5 border-b-2 border-blue-500">
-                        <h3 className="text-blue-600 font-bold text-xs tracking-wide">SOF PLATFORM+</h3>
-                        <span className="text-[10px] text-gray-400">Các ứng dụng thuộc nền tảng SOF</span>
-                      </div>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <FileSignature className="w-4 h-4 text-blue-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Sign</div>
-                            <div className="text-xs text-gray-500 truncate">Chữ ký điện tử</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center flex-shrink-0">
-                            <Grid3x3 className="w-4 h-4 text-pink-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Table</div>
-                            <div className="text-xs text-gray-500 truncate">Hợp nhất dữ liệu</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
-                            <HardDrive className="w-4 h-4 text-orange-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Drive</div>
-                            <div className="text-xs text-gray-500 truncate">Lưu trữ đám mây</div>
-                          </div>
-                        </a>
-                        <a href="#" className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                          <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
-                            <Lock className="w-4 h-4 text-orange-500" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-sm font-semibold text-gray-900">SOF Account</div>
-                            <div className="text-xs text-gray-500 truncate">Quản lý tài khoản</div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
+                {/* Card 3: Tạp hóa */}
+                <a href="http://sof.vn/vi/Phan-mem/82/Phan-mem-quan-ly-tiem-tap-hoa.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Package className="w-6 h-6 text-white" />
                   </div>
-                </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Tạp hóa</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Dành cho cửa hàng nhỏ</p>
+                </a>
 
-                {/* Right side - Info panel */}
-                <div 
-                  className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white relative overflow-hidden flex flex-col"
-                  style={{
-                    width: '256px',
-                    height: '357px'
-                  }}
-                >
-                  <div className="space-y-2">
-                    <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
-                      Khám phá
-                    </div>
-                    <h3 className="text-xl font-bold leading-tight">NỀN TẢNG SOF</h3>
-                    <p className="text-sm text-blue-100 leading-relaxed">
-                      SOF đồng hành trong hành trình cùng 10.000+ doanh nghiệp Việt chuyển mình
-                    </p>
+                {/* Card 4: Cafe */}
+                <a href="http://sof.vn/vi/Phan-mem/75/Phan-mem-quan-ly-quan-cafe.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-amber-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Coffee className="w-6 h-6 text-white" />
                   </div>
-                  
-                  <button className="text-sm text-green-300 hover:text-white flex items-center gap-1 mt-3 font-medium">
-                    Xem thêm <span>→</span>
-                  </button>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Quán Cafe</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">POS, order, kho nguyên liệu</p>
+                </a>
 
-                  {/* Decorative illustration */}
-                  <div className="flex-1 flex items-center justify-center relative mt-4">
-                    <div className="relative w-40 h-40">
-                      {/* Center circle with grid icon */}
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <LayoutGrid className="w-10 h-10 text-white" />
-                      </div>
-                      {/* Decorative circles */}
-                      <div className="absolute top-0 left-6 w-8 h-8 bg-white/15 rounded-full" />
-                      <div className="absolute top-4 right-2 w-6 h-6 bg-white/20 rounded-full" />
-                      <div className="absolute bottom-4 left-2 w-6 h-6 bg-white/15 rounded-full" />
-                      <div className="absolute bottom-8 right-4 w-8 h-8 bg-white/20 rounded-full" />
-                      <div className="absolute top-1/2 right-0 w-4 h-4 bg-white/25 rounded-full" />
-                      <div className="absolute top-1/3 left-0 w-4 h-4 bg-white/25 rounded-full" />
-                      {/* Small dots */}
-                      <div className="absolute top-8 left-1/2 w-2 h-2 bg-white/30 rounded-full" />
-                      <div className="absolute bottom-2 left-1/2 w-2 h-2 bg-white/30 rounded-full" />
-                    </div>
+                {/* Card 5: Nhà hàng */}
+                <a href="http://sof.vn/vi/Phan-mem/76/Phan-mem-quan-ly-nha-hang.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-red-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Utensils className="w-6 h-6 text-white" />
                   </div>
-                </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Nhà hàng</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Quản lý bàn, bếp, bar</p>
+                </a>
+
+                {/* Card 6: Khách sạn */}
+                <a href="http://sof.vn/vi/Phan-mem/77/Phan-mem-quan-ly-khach-san.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-violet-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Hotel className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Khách sạn</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Đặt phòng, check-in/out</p>
+                </a>
+
+                {/* Card 7: Spa */}
+                <a href="http://sof.vn/vi/Phan-mem/83/Phan-mem-quan-ly-Spa.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-pink-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Spa</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Lịch hẹn, dịch vụ spa</p>
+                </a>
+
+                {/* Card 8: Vận tải */}
+                <a href="http://sof.vn/vi/Phan-mem/78/Phan-mem-quan-ly-van-tai.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Truck className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Vận tải</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Đội xe, lộ trình</p>
+                </a>
+
+                {/* Card 9: Kho Pallet */}
+                <a href="http://sof.vn/vi/Phan-mem/374/Phan-men-quan-ly-kho-pallet.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-amber-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Warehouse className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Kho Pallet</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Kho hàng chuyên nghiệp</p>
+                </a>
+
+                {/* Card 10: Bãi gửi xe */}
+                <a href="http://sof.vn/vi/Phan-mem/371/Phan-mem-quan-ly-bai-gui-xe.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-cyan-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Car className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bãi gửi xe</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Bãi xe thông minh</p>
+                </a>
+
+                {/* Card 11: Nhân sự */}
+                <a href="http://sof.vn/vi/Phan-mem/1/Phan-mem-nhan-su-tien-luong.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-pink-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Nhân sự</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Chấm công, tính lương</p>
+                </a>
+
+                {/* Card 12: ERP */}
+                <a href="http://sof.vn/vi/Phan-mem/18/Phan-mem-quan-tri-nguon-luc-doanh-nghiep-(ERP--SOF).html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-indigo-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Building2 className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">ERP</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Quản trị tổng thể</p>
+                </a>
+
+                {/* Card 13: Công ty dược */}
+                <a href="http://sof.vn/vi/Phan-mem/81/Phan-mem-quan-ly-cong-ty-duoc-.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-teal-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Pill className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Công ty dược</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Chuyên ngành dược phẩm</p>
+                </a>
+
+                {/* Card 14: Chat bảo mật */}
+                <a href="http://sof.vn/vi/Phan-mem/377/Phan-mem-chat-bao-mat.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-slate-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Chat bảo mật</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Nhắn tin an toàn</p>
+                </a>
+
+                {/* Card 15: Chữ ký số */}
+                <a href="http://sof.vn/vi/Phan-mem/375/Phan-men-quan-ly-Chu-Ky-So-.html"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-gray-400 group cursor-pointer"
+                   onClick={onClose}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Lock className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Chữ ký số</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Ký số chuyên nghiệp</p>
+                </a>
+
+                {/* Card 16: Xem tất cả - CTA */}
+                <a href="http://sof.vn" target="_blank" rel="noopener noreferrer"
+                   className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
+                   onClick={onClose}>
+                  <LayoutGrid className="w-8 h-8 text-white mb-2" />
+                  <h4 className="font-bold text-white text-sm text-center">Xem tất cả</h4>
+                  <p className="text-xs text-white/80 text-center mt-1">→</p>
+                </a>
               </div>
             </div>
           </div>

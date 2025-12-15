@@ -29,9 +29,9 @@ export const NewsDropdown = ({ isOpen, onClose }: NewsDropdownProps) => {
       <div className="fixed left-0 right-0 z-50 mt-0 top-16 lg:top-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div 
-            className="border border-gray-200 rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
+            className="border border-[#a7d5ec] rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
             style={{ 
-              backgroundColor: '#f8f9fb',
+              backgroundColor: '#f4fbff',
               maxHeight: '500px'
             }}
           >

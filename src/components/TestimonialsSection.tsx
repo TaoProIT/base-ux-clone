@@ -63,12 +63,12 @@ export const TestimonialsSection = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-20 lg:py-32 relative overflow-hidden">
+    <section className="py-20 lg:py-32 relative overflow-hidden bg-[#d2eaf7]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12" data-aos="fade-up">
-          <h2 className="text-3xl lg:text-4xl font-bold">
-            <span className="text-gradient">10,000+</span> doanh nghiệp Việt{" "}
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#0f426c]">
+            <span className="text-[#3087fe]">10,000+</span> doanh nghiệp Việt{" "}
             <br className="hidden sm:block" />
             đã chuyển mình cùng SOFVN
           </h2>
@@ -76,20 +76,20 @@ export const TestimonialsSection = () => {
 
         {/* Testimonial Card */}
         <div className="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-          <div className="glass-card rounded-3xl p-8 lg:p-12 relative">
-            <Quote className="absolute top-6 left-6 w-12 h-12 text-primary/20" />
+          <div className="bg-white rounded-3xl p-8 lg:p-12 relative shadow-lg border border-[#a7d5ec]">
+            <Quote className="absolute top-6 left-6 w-12 h-12 text-[#0f426c]/10" />
             
             <div className="grid lg:grid-cols-3 gap-8 items-center">
               {/* Avatar & Info */}
               <div className="text-center lg:text-left">
-                <div className="w-24 h-24 mx-auto lg:mx-0 rounded-2xl bg-gradient-primary flex items-center justify-center mb-4">
-                  <span className="text-3xl font-bold text-primary-foreground">
+                <div className="w-24 h-24 mx-auto lg:mx-0 rounded-2xl bg-[#0f426c] flex items-center justify-center mb-4">
+                  <span className="text-3xl font-bold text-white">
                     {currentTestimonial.name.charAt(4)}
                   </span>
                 </div>
-                <div className="font-semibold text-foreground">{currentTestimonial.name}</div>
-                <div className="text-sm text-muted-foreground">{currentTestimonial.title}</div>
-                <div className="mt-3 px-3 py-1 inline-block rounded-full bg-secondary text-xs text-muted-foreground">
+                <div className="font-semibold text-[#0f426c]">{currentTestimonial.name}</div>
+                <div className="text-sm text-[#507588]">{currentTestimonial.title}</div>
+                <div className="mt-3 px-3 py-1 inline-block rounded-full bg-[#f4fbff] border border-[#a7d5ec] text-xs text-[#507588]">
                   {currentTestimonial.company}
                 </div>
               </div>
@@ -98,21 +98,21 @@ export const TestimonialsSection = () => {
               <div className="lg:col-span-2 space-y-6">
                 {/* Stat */}
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl lg:text-6xl font-bold text-gradient">
+                  <span className="text-5xl lg:text-6xl font-bold text-[#3087fe]">
                     {currentTestimonial.stat}
                   </span>
-                  <span className="text-muted-foreground">{currentTestimonial.statLabel}</span>
+                  <span className="text-[#507588]">{currentTestimonial.statLabel}</span>
                 </div>
 
                 {/* Quote */}
-                <blockquote className="text-lg text-muted-foreground leading-relaxed italic">
+                <blockquote className="text-lg text-[#507588] leading-relaxed italic">
                   "{currentTestimonial.quote}"
                 </blockquote>
               </div>
             </div>
 
             {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-6 border-t border-border/50">
+            <div className="flex items-center justify-between mt-8 pt-6 border-t border-[#a7d5ec]">
               <div className="flex gap-2">
                 {testimonials.map((_, index) => (
                   <button
@@ -120,8 +120,8 @@ export const TestimonialsSection = () => {
                     onClick={() => setCurrentIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
                       index === currentIndex
-                        ? "w-8 bg-primary"
-                        : "bg-muted hover:bg-muted-foreground"
+                        ? "w-8 bg-[#0f426c]"
+                        : "bg-[#8fc0db] hover:bg-[#0f426c]"
                     }`}
                   />
                 ))}
@@ -129,13 +129,13 @@ export const TestimonialsSection = () => {
               <div className="flex gap-2">
                 <button
                   onClick={prevSlide}
-                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+                  className="w-10 h-10 rounded-full bg-[#f4fbff] border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#c3e8ff] transition-colors"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+                  className="w-10 h-10 rounded-full bg-[#f4fbff] border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#c3e8ff] transition-colors"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>

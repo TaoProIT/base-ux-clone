@@ -1,78 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
-
 @layer base {
   :root {
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
+    /* SOF.VN Light Blue Theme */
+    --background: 200 60% 94%;        /* #d2eaf7 - Light blue background */
+    --foreground: 207 67% 24%;        /* #0f426c - Dark blue text */
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;                /* #ffffff - White cards */
+    --card-foreground: 207 67% 24%;   /* #0f426c - Dark blue text */
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;             /* #ffffff */
+    --popover-foreground: 207 67% 24%;
 
-    --primary: 195 100% 50%;
-    --primary-foreground: 222 47% 5%;
+    --primary: 207 67% 24%;           /* #0f426c - Primary dark blue */
+    --primary-foreground: 0 0% 100%;  /* White text on primary */
 
-    --secondary: 222 30% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 200 80% 88%;         /* #c3e8ff - Light blue secondary */
+    --secondary-foreground: 207 67% 24%;
 
-    --muted: 222 30% 12%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 200 60% 90%;             /* Muted light blue */
+    --muted-foreground: 200 30% 40%;  /* #507588 - Muted text */
 
-    --accent: 195 100% 50%;
-    --accent-foreground: 222 47% 5%;
+    --accent: 214 100% 59%;           /* #3087fe - Accent blue */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 195 100% 50%;
+    --border: 197 55% 80%;            /* #a7d5ec - Light blue border */
+    --input: 197 55% 80%;
+    --ring: 207 67% 24%;              /* #0f426c */
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(220 100% 60%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 12% / 0.8) 0%, hsl(222 47% 8% / 0.6) 100%);
-    --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(195 100% 50% / 0.15) 0%, transparent 50%);
-    --glow-primary: 0 0 60px hsl(195 100% 50% / 0.3);
-    --glow-card: 0 0 40px hsl(195 100% 50% / 0.1);
+    /* Custom design tokens - SOF.VN Style */
+    --gradient-primary: linear-gradient(135deg, hsl(207 67% 24%) 0%, hsl(214 100% 59%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(200 60% 97%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(201 100% 97%) 0%, hsl(200 60% 94%) 100%);
+    --glow-primary: 0 0 20px hsl(207 67% 24% / 0.15);
+    --glow-card: 0 4px 20px hsl(207 67% 24% / 0.08);
     
-    --sidebar-background: 222 47% 5%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 195 100% 50%;
-    --sidebar-primary-foreground: 222 47% 5%;
-    --sidebar-accent: 222 30% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 195 100% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 207 67% 24%;
+    --sidebar-primary: 207 67% 24%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 200 80% 88%;
+    --sidebar-accent-foreground: 207 67% 24%;
+    --sidebar-border: 197 55% 80%;
+    --sidebar-ring: 207 67% 24%;
+
+    /* SOF.VN specific colors */
+    --sof-primary: #0f426c;
+    --sof-secondary: #8fc0db;
+    --sof-accent: #3087fe;
+    --sof-light-bg: #d2eaf7;
+    --sof-header-bg: #f4fbff;
+    --sof-border: #a7d5ec;
+    --sof-text-muted: #507588;
   }
 
   .dark {
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 195 100% 50%;
-    --primary-foreground: 222 47% 5%;
-    --secondary: 222 30% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 222 30% 12%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 195 100% 50%;
-    --accent-foreground: 222 47% 5%;
+    /* Keep dark mode option but styled for SOF.VN */
+    --background: 207 67% 12%;
+    --foreground: 200 60% 94%;
+    --card: 207 67% 18%;
+    --card-foreground: 200 60% 94%;
+    --popover: 207 67% 18%;
+    --popover-foreground: 200 60% 94%;
+    --primary: 200 80% 70%;
+    --primary-foreground: 207 67% 12%;
+    --secondary: 207 67% 24%;
+    --secondary-foreground: 200 60% 94%;
+    --muted: 207 50% 20%;
+    --muted-foreground: 200 40% 70%;
+    --accent: 214 100% 59%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 195 100% 50%;
+    --destructive-foreground: 200 60% 94%;
+    --border: 207 50% 25%;
+    --input: 207 50% 25%;
+    --ring: 200 80% 70%;
   }
 }
 
@@ -114,8 +125,9 @@
   }
 
   .glass-card {
-    @apply backdrop-blur-xl border border-border/50;
-    background: var(--gradient-card);
+    @apply backdrop-blur-xl border border-border rounded-lg;
+    background: white;
+    box-shadow: 0 4px 20px rgba(15, 66, 108, 0.08);
   }
 
   .animate-float {
@@ -172,27 +184,27 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(195 100% 50% / 0.2);
+    box-shadow: 0 4px 20px hsl(207 67% 24% / 0.1);
   }
   50% {
-    box-shadow: 0 0 40px hsl(195 100% 50% / 0.4);
+    box-shadow: 0 4px 30px hsl(207 67% 24% / 0.2);
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - SOF.VN Style */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: hsl(200 60% 94%);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
+  background: hsl(207 67% 24% / 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+  background: hsl(207 67% 24% / 0.5);
 }

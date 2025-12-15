@@ -8,7 +8,7 @@ const awards = [
 
 export const AwardsSection = () => {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden">
+    <section className="py-16 lg:py-24 relative overflow-hidden bg-[#f4fbff]">
       {/* Infinite scroll awards */}
       <div className="relative">
         <div className="flex animate-slide-left">
@@ -17,20 +17,20 @@ export const AwardsSection = () => {
               key={index}
               className="flex-shrink-0 px-6"
             >
-              <div className="glass-card rounded-xl p-6 w-64 hover:glow-card transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-4">
-                  <span className="text-primary-foreground font-bold">🏆</span>
+              <div className="bg-white border border-[#a7d5ec] rounded-xl p-6 w-64 hover:shadow-lg transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-[#0f426c] flex items-center justify-center mb-4">
+                  <span className="text-white font-bold">🏆</span>
                 </div>
-                <div className="font-semibold text-foreground mb-1">{award.name}</div>
-                <div className="text-sm text-muted-foreground">{award.description}</div>
+                <div className="font-semibold text-[#0f426c] mb-1">{award.name}</div>
+                <div className="text-sm text-[#507588]">{award.description}</div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Gradient overlays */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#f4fbff] to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#f4fbff] to-transparent pointer-events-none" />
       </div>
     </section>
   );

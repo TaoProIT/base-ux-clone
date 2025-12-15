@@ -28,17 +28,17 @@ export const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-20 lg:py-32 relative">
+    <section className="py-20 lg:py-32 relative bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Hỏi đáp cùng <span className="text-gradient">SOF</span>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
+              Hỏi đáp cùng <span className="text-[#3087fe]">SOF</span>
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-[#507588]">
               Chúng tôi đã tổng hợp những câu hỏi thường gặp nhất từ khách hàng.{" "}
-              <a href="#" className="text-primary hover:underline">
+              <a href="#" className="text-[#0f426c] hover:underline font-medium">
                 Liên hệ ngay
               </a>{" "}
               nếu vẫn còn câu hỏi.
@@ -52,24 +52,24 @@ export const FAQSection = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 40}
-                className="glass-card rounded-xl overflow-hidden"
+                className="bg-[#f4fbff] rounded-xl overflow-hidden border border-[#a7d5ec]"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-left hover:bg-secondary/30 transition-colors"
+                  className="w-full flex items-center justify-between p-5 text-left hover:bg-[#c3e8ff]/50 transition-colors"
                 >
-                  <span className="font-medium text-foreground pr-4">
+                  <span className="font-medium text-[#0f426c] pr-4">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-[#507588] flex-shrink-0 transition-transform duration-300 ${
                       openIndex === index ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {openIndex === index && (
                   <div className="px-5 pb-5">
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-[#507588] leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
