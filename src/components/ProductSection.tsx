@@ -1,126 +1,101 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { 
-  Briefcase, Users, TrendingUp, FileText, Workflow, Building, 
-  DollarSign, MessageSquare, Calendar, Target, Receipt, 
-  Building2, Megaphone, Package, ChevronLeft, ChevronRight,
-  ShoppingCart, Hotel, Car, Store, Coffee, Utensils, Truck, Pill, Lock, Warehouse
+import {
+  Briefcase, Users, TrendingUp, Building2,
+  DollarSign, Package, ChevronLeft, ChevronRight,
+  ShoppingCart, Coffee, Clock, ShieldCheck, Box, Smile,
+  Globe, Smartphone, Server, Headphones, Wifi, Lock, Calculator, Tag
 } from "lucide-react";
 
 const products = [
   {
-    id: "banhang",
-    title: "Quản lý bán hàng",
-    headline: "Phần mềm quản lý bán hàng chuyên nghiệp",
+    id: "erp",
+    title: "SOF ERP",
+    headline: "Hệ thống quản trị nguồn lực doanh nghiệp hợp nhất",
     features: [
-      "Quản lý đơn hàng, hóa đơn dễ dàng",
-      "Báo cáo doanh thu, lợi nhuận chi tiết",
-      "Tích hợp thanh toán đa kênh",
+      "Quản lý quy trình cung ứng và mua hàng",
+      "Kiểm soát kho, vật tư và sản xuất theo thời gian thực",
+      "Tích hợp báo cáo kế toán và tài chính tự động",
     ],
     apps: [
-      { name: "Quản lý bán hàng", icon: ShoppingCart },
-      { name: "Quản lý siêu thị", icon: Store },
-      { name: "Quản lý tiệm tạp hóa", icon: Package },
+      { name: "ERP Core", icon: Building2 },
+      { name: "Quản lý kho", icon: Package },
+      { name: "Kế toán", icon: Calculator },
+      { name: "Mua hàng", icon: ShoppingCart },
     ],
     gradient: "from-blue-500 to-cyan-400",
-    href: "http://sof.vn/vi/Phan-mem/23/Phan-mem-quan-ly-ban-hang.html",
-  },
-  {
-    id: "fnb",
-    title: "F&B - Nhà hàng & Cafe",
-    headline: "Giải pháp quản lý quán cafe, nhà hàng hiện đại",
-    features: [
-      "Quản lý bàn, order, bếp/bar",
-      "Tích hợp POS màn hình cảm ứng",
-      "Quản lý kho nguyên liệu, công thức",
-    ],
-    apps: [
-      { name: "Quản lý quán cafe", icon: Coffee },
-      { name: "Quản lý nhà hàng", icon: Utensils },
-    ],
-    gradient: "from-emerald-500 to-teal-400",
-    href: "http://sof.vn/vi/Phan-mem/75/Phan-mem-quan-ly-quan-cafe.html",
-  },
-  {
-    id: "hotel",
-    title: "Khách sạn & Spa",
-    headline: "Phần mềm quản lý khách sạn, spa chuyên nghiệp",
-    features: [
-      "Quản lý đặt phòng, check-in/out",
-      "Quản lý dịch vụ spa, lịch hẹn",
-      "Báo cáo công suất, doanh thu",
-    ],
-    apps: [
-      { name: "Quản lý khách sạn", icon: Hotel },
-      { name: "Quản lý Spa", icon: Users },
-    ],
-    gradient: "from-violet-500 to-purple-400",
-    href: "http://sof.vn/vi/Phan-mem/77/Phan-mem-quan-ly-khach-san.html",
-  },
-  {
-    id: "logistics",
-    title: "Vận tải & Kho bãi",
-    headline: "Giải pháp quản lý vận tải, kho hàng thông minh",
-    features: [
-      "Quản lý đội xe, lộ trình",
-      "Quản lý kho pallet chuyên nghiệp",
-      "Quản lý bãi gửi xe thông minh",
-    ],
-    apps: [
-      { name: "Quản lý vận tải", icon: Truck },
-      { name: "Quản lý kho pallet", icon: Warehouse },
-      { name: "Quản lý bãi gửi xe", icon: Car },
-    ],
-    gradient: "from-orange-500 to-amber-400",
-    href: "http://sof.vn/vi/Phan-mem/78/Phan-mem-quan-ly-van-tai.html",
-  },
-  {
-    id: "hrm",
-    title: "Nhân sự & Tiền lương",
-    headline: "Phần mềm nhân sự tiền lương tự động",
-    features: [
-      "Quản lý hồ sơ nhân viên",
-      "Chấm công, tính lương tự động",
-      "Quản lý phúc lợi, bảo hiểm",
-    ],
-    apps: [
-      { name: "Nhân sự tiền lương", icon: Users },
-      { name: "Chấm công", icon: Calendar },
-    ],
-    gradient: "from-pink-500 to-rose-400",
-    href: "http://sof.vn/vi/Phan-mem/1/Phan-mem-nhan-su-tien-luong.html",
-  },
-  {
-    id: "erp",
-    title: "ERP Doanh nghiệp",
-    headline: "Phần mềm quản trị nguồn lực doanh nghiệp",
-    features: [
-      "Tích hợp toàn diện các module",
-      "Quản lý công ty dược chuyên ngành",
-      "Báo cáo quản trị đa chiều",
-    ],
-    apps: [
-      { name: "ERP SOF", icon: Building2 },
-      { name: "Quản lý công ty dược", icon: Pill },
-    ],
-    gradient: "from-indigo-500 to-blue-400",
     href: "http://sof.vn/vi/Phan-mem/18/Phan-mem-quan-tri-nguon-luc-doanh-nghiep-(ERP--SOF).html",
   },
   {
-    id: "security",
-    title: "Bảo mật & Chữ ký số",
-    headline: "Giải pháp bảo mật và chữ ký số",
+    id: "hrm",
+    title: "SOF HRM",
+    headline: "Giải pháp nhân sự & Tính lương tự động",
     features: [
-      "Phần mềm chat bảo mật",
-      "Quản lý chữ ký số chuyên nghiệp",
-      "Bảo mật thông tin doanh nghiệp",
+      "Quản lý hồ sơ nhân sự, hợp đồng lao động",
+      "Chấm công vân tay/FaceID, tính lương tự động",
+      "Cổng thông tin nhân viên (Portal) tiện lợi",
     ],
     apps: [
-      { name: "Chat bảo mật", icon: MessageSquare },
-      { name: "Quản lý Chữ Ký Số", icon: Lock },
+      { name: "Hồ sơ nhân sự", icon: Users },
+      { name: "Chấm công", icon: Clock },
+      { name: "Tính lương", icon: DollarSign },
+      { name: "Bảo hiểm", icon: ShieldCheck },
     ],
-    gradient: "from-slate-600 to-gray-500",
-    href: "http://sof.vn/vi/Phan-mem/377/Phan-mem-chat-bao-mat.html",
+    gradient: "from-emerald-500 to-teal-400",
+    href: "http://sof.vn/vi/Phan-mem/1/Phan-mem-nhan-su-tien-luong.html",
+  },
+  {
+    id: "pos",
+    title: "SOF POS",
+    headline: "Quản lý bán hàng & Chuỗi cửa hàng bán lẻ",
+    features: [
+      "Phần mềm quản lý nhà hàng, Cafe, Karaoke",
+      "Quản lý siêu thị, tạp hóa, shop thời trang",
+      "Tích hợp in hóa đơn, mã vạch, tồn kho",
+    ],
+    apps: [
+      { name: "POS F&B", icon: Coffee },
+      { name: "POS Retail", icon: Tag },
+      { name: "Kho hàng", icon: Box },
+      { name: "Khách hàng", icon: Smile },
+    ],
+    gradient: "from-orange-500 to-amber-400",
+    href: "http://sof.vn/vi/Phan-mem/23/Phan-mem-quan-ly-ban-hang.html",
+  },
+  {
+    id: "web",
+    title: "WEB & APP",
+    headline: "Thiết kế Website & Ứng dụng theo yêu cầu",
+    features: [
+      "Thiết kế website doanh nghiệp, thương mại điện tử",
+      "Phát triển Mobile App (iOS/Android) thương hiệu riêng",
+      "Dịch vụ Hosting, Domain và Server",
+    ],
+    apps: [
+      { name: "Web Design", icon: Globe },
+      { name: "Mobile App", icon: Smartphone },
+      { name: "Hosting", icon: Server },
+      { name: "SEO", icon: TrendingUp },
+    ],
+    gradient: "from-violet-500 to-purple-400",
+    href: "#",
+  },
+  {
+    id: "service",
+    title: "IT SERVICES",
+    headline: "Dịch vụ hạ tầng CNTT & Bảo trì hệ thống",
+    features: [
+      "Quản trị hệ thống mạng Linux/Windows",
+      "Cài đặt Mail Server, bảo mật dữ liệu",
+      "Bảo trì máy chủ và thiết bị văn phòng",
+    ],
+    apps: [
+      { name: "IT Support", icon: Headphones },
+      { name: "Network", icon: Wifi },
+      { name: "Security", icon: Lock },
+    ],
+    gradient: "from-pink-500 to-rose-400",
+    href: "#",
   },
 ];
 
@@ -137,11 +112,11 @@ export const ProductSection = () => {
   };
 
   return (
-    <section className="py-20 lg:py-32 relative bg-[#d2eaf7]">
+    <section className="py-16 lg:py-32 relative bg-[#d2eaf7]">
       {/* Section header */}
-      <div className="container mx-auto px-4 lg:px-8 mb-16">
+      <div className="container mx-auto px-4 lg:px-8 mb-12 lg:mb-16">
         <div className="text-center" data-aos="fade-up">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
             Một nền tảng <span className="text-[#3087fe]">|</span>{" "}
             <span className="text-[#3087fe]">Mọi giải pháp</span>
           </h2>
@@ -158,14 +133,14 @@ export const ProductSection = () => {
                 {product.title}
               </span>
             </div>
-            
-            <h3 className="text-2xl lg:text-3xl font-bold leading-tight text-[#0f426c]">
+
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold leading-snug text-[#0f426c] break-words">
               {product.headline}
             </h3>
 
             <ul className="space-y-3">
               {product.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-[#507588]">
+                <li key={i} className="flex items-start gap-3 text-base text-[#507588]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#0f426c] mt-2 flex-shrink-0" />
                   {feature}
                 </li>
@@ -189,9 +164,9 @@ export const ProductSection = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4">
-              <Button variant="heroOutline">Xem chi tiết</Button>
-              <Button variant="hero">Demo tính năng</Button>
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <Button variant="heroOutline" className="w-full sm:w-auto">Xem chi tiết</Button>
+              <Button variant="hero" className="w-full sm:w-auto">Demo tính năng</Button>
             </div>
           </div>
 
@@ -206,7 +181,7 @@ export const ProductSection = () => {
                     <Briefcase className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="font-semibold text-[#0f426c]">{product.title}</div>
+                    <div className="text-base font-semibold text-[#0f426c]">{product.title}</div>
                     <div className="text-xs text-[#507588]">Dashboard Overview</div>
                   </div>
                 </div>
@@ -255,26 +230,28 @@ export const ProductSection = () => {
         <div className="flex items-center justify-center gap-4 mt-12">
           <button
             onClick={prevProduct}
-            className="w-10 h-10 rounded-full bg-white border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#f4fbff] transition-colors"
+            className="w-11 h-11 rounded-full bg-white border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#f4fbff] transition-colors"
+            aria-label="Sản phẩm trước"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             {products.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "w-8 bg-[#0f426c]"
-                    : "bg-[#8fc0db] hover:bg-[#0f426c]"
-                }`}
+                className={`h-3 rounded-full transition-all duration-300 ${index === currentIndex
+                  ? "w-10 bg-[#0f426c]"
+                  : "w-3 bg-[#8fc0db] hover:bg-[#0f426c]"
+                  }`}
+                aria-label={`Sản phẩm ${index + 1}`}
               />
             ))}
           </div>
           <button
             onClick={nextProduct}
-            className="w-10 h-10 rounded-full bg-white border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#f4fbff] transition-colors"
+            className="w-11 h-11 rounded-full bg-white border border-[#a7d5ec] flex items-center justify-center text-[#507588] hover:text-[#0f426c] hover:bg-[#f4fbff] transition-colors"
+            aria-label="Sản phẩm tiếp theo"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

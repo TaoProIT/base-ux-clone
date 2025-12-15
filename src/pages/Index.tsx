@@ -7,7 +7,7 @@ import { BaseAISection } from "@/components/BaseAISection";
 import { JourneySection } from "@/components/JourneySection";
 import { IntegrationsSection } from "@/components/IntegrationsSection";
 import { TrustedSection } from "@/components/TrustedSection";
-import { AwardsSection } from "@/components/AwardsSection";
+// import { AwardsSection } from "@/components/AwardsSection";
 import { FAQSection } from "@/components/FAQSection";
 import { BlogSection } from "@/components/BlogSection";
 import { CTASection } from "@/components/CTASection";
@@ -16,9 +16,9 @@ import { FloatingButtons } from "@/components/FloatingButtons";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Navbar />
-      <main>
+      <main className="overflow-x-hidden">
         <HeroSection />
         <LogoCarousel />
         <ProductSection />
@@ -27,7 +27,7 @@ const Index = () => {
         <JourneySection />
         <IntegrationsSection />
         <TrustedSection />
-        <AwardsSection />
+        {/* <AwardsSection /> */}
         <FAQSection />
         <BlogSection />
         <CTASection />

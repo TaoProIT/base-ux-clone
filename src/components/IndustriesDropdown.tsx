@@ -11,6 +11,7 @@ import {
   Home,
   Shirt,
   Zap,
+  LayoutGrid,
 } from "lucide-react";
 
 interface IndustriesDropdownProps {
@@ -36,152 +37,161 @@ export const IndustriesDropdown = ({ isOpen, onClose }: IndustriesDropdownProps)
             className="border border-[#a7d5ec] rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
             style={{ 
               backgroundColor: '#f4fbff',
-              maxHeight: '500px'
+              maxHeight: '600px'
             }}
           >
+            {/* GIAO DIỆN MỚI - BỐ CỤC CARDS */}
             <div className="p-8">
-              <div className="grid grid-cols-[1fr_280px] gap-8">
-                {/* Left side - Industries */}
-                <div>
-                  <div className="mb-4 pb-2 border-b-2 border-blue-500">
-                    <h3 className="text-blue-600 font-bold text-sm tracking-wide">NGÀNH NGHỀ ÁP DỤNG</h3>
-                  </div>
-                  <div className="grid grid-cols-3 gap-x-6 gap-y-3">
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <ShoppingBag className="w-5 h-5 text-blue-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Bán lẻ</div>
-                        <div className="text-xs text-gray-500">Retail</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center flex-shrink-0">
-                        <Factory className="w-5 h-5 text-orange-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Sản xuất</div>
-                        <div className="text-xs text-gray-500">Manufacturing</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <GraduationCap className="w-5 h-5 text-green-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Giáo dục</div>
-                        <div className="text-xs text-gray-500">Education</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
-                        <Heart className="w-5 h-5 text-red-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Y tế</div>
-                        <div className="text-xs text-gray-500">Healthcare</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                        <Building2 className="w-5 h-5 text-purple-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Bất động sản</div>
-                        <div className="text-xs text-gray-500">Real Estate</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                        <Utensils className="w-5 h-5 text-yellow-600" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">F&B</div>
-                        <div className="text-xs text-gray-500">Food & Beverage</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <Landmark className="w-5 h-5 text-blue-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Tài chính</div>
-                        <div className="text-xs text-gray-500">Finance</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0">
-                        <Plane className="w-5 h-5 text-cyan-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Du lịch</div>
-                        <div className="text-xs text-gray-500">Travel</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <Truck className="w-5 h-5 text-green-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Logistics</div>
-                        <div className="text-xs text-gray-500">Vận tải</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center flex-shrink-0">
-                        <Shirt className="w-5 h-5 text-pink-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Thời trang</div>
-                        <div className="text-xs text-gray-500">Fashion</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                        <Zap className="w-5 h-5 text-yellow-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Công nghệ</div>
-                        <div className="text-xs text-gray-500">Technology</div>
-                      </div>
-                    </a>
-                    <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                      <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                        <Home className="w-5 h-5 text-indigo-500" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-gray-900">Dịch vụ</div>
-                        <div className="text-xs text-gray-500">Services</div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
+              {/* Header */}
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent mb-2">
+                  Lĩnh Vực Áp Dụng
+                </h2>
+                <p className="text-sm text-gray-600">Giải pháp phần mềm cho mọi ngành nghề</p>
+              </div>
 
-                {/* Right side - CTA panel */}
-                <div 
-                  className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white relative overflow-hidden flex flex-col justify-between"
-                  style={{ height: '360px' }}
-                >
-                  <div className="space-y-3">
-                    <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
-                      Case Study
-                    </div>
-                    <h3 className="text-xl font-bold leading-tight">KHÁCH HÀNG THÀNH CÔNG</h3>
-                    <p className="text-sm text-orange-100 leading-relaxed">
-                      Khám phá cách SOF giúp doanh nghiệp tối ưu hóa quy trình và tăng trưởng bền vững
-                    </p>
+              {/* Grid 4 cột - Bố cục mới */}
+              <div className="grid grid-cols-4 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-50">
+                {/* Card 1: Bán lẻ */}
+                <a href="#" 
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <ShoppingBag className="w-6 h-6 text-white" />
                   </div>
-                  
-                  <button className="bg-white text-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors">
-                    Xem case study →
-                  </button>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bán lẻ</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Retail & POS</p>
+                </a>
 
-                  {/* Decorative circles */}
-                  <div className="absolute top-4 right-4 w-24 h-24 bg-white/10 rounded-full" />
-                  <div className="absolute bottom-12 right-8 w-16 h-16 bg-white/10 rounded-full" />
-                  <div className="absolute top-1/2 right-0 w-10 h-10 bg-white/15 rounded-full" />
-                </div>
+                {/* Card 2: Sản xuất */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Factory className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Sản xuất</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Manufacturing</p>
+                </a>
+
+                {/* Card 3: Giáo dục */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <GraduationCap className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Giáo dục</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Education</p>
+                </a>
+
+                {/* Card 4: Y tế */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-red-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Y tế</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Healthcare</p>
+                </a>
+
+                {/* Card 5: Bất động sản */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-purple-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Building2 className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bất động sản</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Real Estate</p>
+                </a>
+
+                {/* Card 6: F&B */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-yellow-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Utensils className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">F&B</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Food & Beverage</p>
+                </a>
+
+                {/* Card 7: Tài chính */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Landmark className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Tài chính</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Finance & Banking</p>
+                </a>
+
+                {/* Card 8: Du lịch */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-cyan-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Plane className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Du lịch</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Travel & Tourism</p>
+                </a>
+
+                {/* Card 9: Logistics */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Truck className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Logistics</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Vận tải & Giao nhận</p>
+                </a>
+
+                {/* Card 10: Thời trang */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-pink-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Shirt className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Thời trang</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Fashion & Retail</p>
+                </a>
+
+                {/* Card 11: Công nghệ */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-yellow-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Zap className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Công nghệ</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Technology & IT</p>
+                </a>
+
+                {/* Card 12: Dịch vụ */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-indigo-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Home className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Dịch vụ</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Professional Services</p>
+                </a>
+
+                {/* Card 13: Xem tất cả - CTA */}
+                <a href="#"
+                   className="bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <LayoutGrid className="w-8 h-8 text-white mb-2" />
+                  <h4 className="font-bold text-white text-sm text-center">Xem tất cả</h4>
+                  <p className="text-xs text-white/80 text-center mt-1">→</p>
+                </a>
               </div>
             </div>
           </div>

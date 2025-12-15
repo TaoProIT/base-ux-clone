@@ -28,15 +28,15 @@ export const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-20 lg:py-32 relative bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-16 lg:py-32 relative bg-white">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12" data-aos="fade-up">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-[#0f426c]">
+          <div className="text-center mb-8 sm:mb-12" data-aos="fade-up">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-[#0f426c]">
               Hỏi đáp cùng <span className="text-[#3087fe]">SOF</span>
             </h2>
-            <p className="text-[#507588]">
+            <p className="text-sm sm:text-base text-[#507588] px-3">
               Chúng tôi đã tổng hợp những câu hỏi thường gặp nhất từ khách hàng.{" "}
               <a href="#" className="text-[#0f426c] hover:underline font-medium">
                 Liên hệ ngay
@@ -46,30 +46,30 @@ export const FAQSection = () => {
           </div>
 
           {/* FAQ List */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 40}
-                className="bg-[#f4fbff] rounded-xl overflow-hidden border border-[#a7d5ec]"
+                className="bg-[#f4fbff] rounded-lg sm:rounded-xl overflow-hidden border border-[#a7d5ec]"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-left hover:bg-[#c3e8ff]/50 transition-colors"
+                  className="w-full flex items-center justify-between p-3 sm:p-5 text-left hover:bg-[#c3e8ff]/50 transition-colors"
                 >
-                  <span className="font-medium text-[#0f426c] pr-4">
+                  <span className="font-medium text-[#0f426c] pr-3 sm:pr-4 text-sm sm:text-base">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#507588] flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-[#507588] flex-shrink-0 transition-transform duration-300 ${
                       openIndex === index ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 {openIndex === index && (
-                  <div className="px-5 pb-5">
-                    <p className="text-[#507588] leading-relaxed">
+                  <div className="px-3 pb-3 sm:px-5 sm:pb-5">
+                    <p className="text-[#507588] leading-relaxed text-xs sm:text-base">
                       {faq.answer}
                     </p>
                   </div>

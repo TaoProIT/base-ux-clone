@@ -1,16 +1,14 @@
 import {
   Rocket,
   Building2,
-  ShoppingBag,
-  Users,
-  Briefcase,
   Factory,
-  GraduationCap,
-  Heart,
   DollarSign,
   Tag,
   CreditCard,
   Package,
+  Award,
+  TrendingUp,
+  LayoutGrid,
 } from "lucide-react";
 
 interface SolutionsDropdownProps {
@@ -36,119 +34,128 @@ export const SolutionsDropdown = ({ isOpen, onClose }: SolutionsDropdownProps) =
             className="border border-[#a7d5ec] rounded-2xl shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300 overflow-hidden"
             style={{ 
               backgroundColor: '#f4fbff',
-              maxHeight: '500px'
+              maxHeight: '600px'
             }}
           >
+            {/* GIAO DIỆN MỚI - BỐ CỤC CARDS */}
             <div className="p-8">
-              <div className="grid grid-cols-[1fr_280px] gap-8">
-                {/* Left side - Solutions */}
-                <div className="grid grid-cols-2 gap-x-12 gap-y-6">
-                  {/* Column 1 - Giải pháp theo ngành */}
-                  <div>
-                    <div className="mb-4 pb-2 border-b-2 border-blue-500">
-                      <h3 className="text-blue-600 font-bold text-sm tracking-wide">GIẢI PHÁP THEO QUY MÔ</h3>
-                    </div>
-                    <div className="space-y-3">
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                          <Rocket className="w-5 h-5 text-purple-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Startup & SME</div>
-                          <div className="text-xs text-gray-500">Giải pháp cho doanh nghiệp nhỏ</div>
-                        </div>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <Building2 className="w-5 h-5 text-blue-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Doanh nghiệp vừa</div>
-                          <div className="text-xs text-gray-500">100-500 nhân viên</div>
-                        </div>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                          <Factory className="w-5 h-5 text-green-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Doanh nghiệp lớn</div>
-                          <div className="text-xs text-gray-500">500+ nhân viên</div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
+              {/* Header */}
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent mb-2">
+                  Giải Pháp & Bảng Giá
+                </h2>
+                <p className="text-sm text-gray-600">Lựa chọn gói dịch vụ phù hợp với quy mô doanh nghiệp</p>
+              </div>
 
-                  {/* Column 2 - Bảng giá */}
-                  <div>
-                    <div className="mb-4 pb-2 border-b-2 border-green-500">
-                      <h3 className="text-green-600 font-bold text-sm tracking-wide">BẢNG GIÁ & GÓI DỊCH VỤ</h3>
-                    </div>
-                    <div className="space-y-3">
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
-                          <Tag className="w-5 h-5 text-yellow-600" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Gói cơ bản</div>
-                          <div className="text-xs text-gray-500">Phù hợp cho startup</div>
-                        </div>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <Package className="w-5 h-5 text-blue-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Gói chuyên nghiệp</div>
-                          <div className="text-xs text-gray-500">Dành cho DN vừa</div>
-                        </div>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                          <CreditCard className="w-5 h-5 text-purple-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Gói doanh nghiệp</div>
-                          <div className="text-xs text-gray-500">Tùy chỉnh theo nhu cầu</div>
-                        </div>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors group" onClick={(e) => { e.preventDefault(); onClose(); }}>
-                        <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0">
-                          <DollarSign className="w-5 h-5 text-green-500" />
-                        </div>
-                        <div className="min-w-0">
-                          <div className="text-sm font-semibold text-gray-900">Xem bảng giá chi tiết</div>
-                          <div className="text-xs text-gray-500">So sánh các gói</div>
-                        </div>
-                      </a>
-                    </div>
+              {/* Grid 3 cột - Bố cục mới */}
+              <div className="grid grid-cols-3 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-green-50">
+                {/* Card 1: Startup & SME */}
+                <a href="#" 
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-purple-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Rocket className="w-6 h-6 text-white" />
                   </div>
-                </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Startup & SME</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Giải pháp tối ưu cho doanh nghiệp nhỏ và vừa</p>
+                </a>
 
-                {/* Right side - CTA panel */}
-                <div 
-                  className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white relative overflow-hidden flex flex-col justify-between"
-                  style={{ height: '320px' }}
-                >
-                  <div className="space-y-3">
-                    <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-medium">
-                      Ưu đãi đặc biệt
-                    </div>
-                    <h3 className="text-xl font-bold leading-tight">TƯ VẤN MIỄN PHÍ</h3>
-                    <p className="text-sm text-green-100 leading-relaxed">
-                      Nhận tư vấn 1-1 từ chuyên gia về giải pháp phù hợp cho doanh nghiệp
-                    </p>
+                {/* Card 2: Doanh nghiệp vừa */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Building2 className="w-6 h-6 text-white" />
                   </div>
-                  
-                  <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors">
-                    Đăng ký ngay →
-                  </button>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Doanh nghiệp vừa</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Cho DN từ 100-500 nhân viên</p>
+                </a>
 
-                  {/* Decorative circles */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full" />
-                  <div className="absolute bottom-8 right-12 w-12 h-12 bg-white/10 rounded-full" />
-                  <div className="absolute top-1/2 right-2 w-8 h-8 bg-white/15 rounded-full" />
-                </div>
+                {/* Card 3: Doanh nghiệp lớn */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Factory className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Doanh nghiệp lớn</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Giải pháp cho DN 500+ nhân viên</p>
+                </a>
+
+                {/* Card 4: Gói cơ bản */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-yellow-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Tag className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Gói cơ bản</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Phù hợp cho startup mới khởi nghiệp</p>
+                </a>
+
+                {/* Card 5: Gói chuyên nghiệp */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Package className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Gói chuyên nghiệp</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Dành cho doanh nghiệp vừa và nhỏ</p>
+                </a>
+
+                {/* Card 6: Gói doanh nghiệp */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-purple-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <CreditCard className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Gói doanh nghiệp</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Tùy chỉnh theo nhu cầu riêng</p>
+                </a>
+
+                {/* Card 7: Bảng giá chi tiết */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <DollarSign className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bảng giá chi tiết</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">So sánh các gói và tính năng</p>
+                </a>
+
+                {/* Card 8: Ưu đãi đặc biệt */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Award className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Ưu đãi đặc biệt</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Khuyến mãi cho khách hàng mới</p>
+                </a>
+
+                {/* Card 9: ROI & Hiệu quả */}
+                <a href="#"
+                   className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-emerald-400 group cursor-pointer"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <h4 className="font-bold text-gray-800 mb-1 text-sm">ROI & Hiệu quả</h4>
+                  <p className="text-xs text-gray-500 line-clamp-2">Tính toán lợi nhuận đầu tư</p>
+                </a>
+
+                {/* Card 10: Xem tất cả - CTA */}
+                <a href="#"
+                   className="bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
+                   onClick={(e) => { e.preventDefault(); onClose(); }}>
+                  <LayoutGrid className="w-8 h-8 text-white mb-2" />
+                  <h4 className="font-bold text-white text-sm text-center">Xem tất cả</h4>
+                  <p className="text-xs text-white/80 text-center mt-1">→</p>
+                </a>
               </div>
             </div>
           </div>
