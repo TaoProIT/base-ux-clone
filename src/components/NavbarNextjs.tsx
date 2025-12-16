@@ -45,18 +45,18 @@ const mobileProductItems = [
   {
     name: "Bán hàng",
     icon: ShoppingCart,
-    href: "http://192.168.1.19/phanmembanhang/",
+    href: "/phanmembanhang",
   },
   { name: "Siêu thị", icon: Store, href: "/under-construction" },
   {
     name: "Tạp hóa",
     icon: Package,
-    href: "http://192.168.1.19/phanmembanhang/",
+    href: "/phanmembanhang",
   },
   {
     name: "Quán Cafe",
     icon: Coffee,
-    href: "http://192.168.1.19/phanmembanhang/",
+    href: "/phanmembanhang",
   },
   { name: "Nhà hàng", icon: Utensils, href: "/under-construction" },
   { name: "Khách sạn", icon: Hotel, href: "/under-construction" },

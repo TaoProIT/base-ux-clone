@@ -18,10 +18,10 @@ const navItems = [
 
 // Mobile dropdown items
 const mobileProductItems = [
-  { name: "Bán hàng", icon: ShoppingCart, href: "http://192.168.1.19/phanmembanhang/" },
+  { name: "Bán hàng", icon: ShoppingCart, href: "/phanmembanhang" },
   { name: "Siêu thị", icon: Store, href: "/under-construction" },
-  { name: "Tạp hóa", icon: Package, href: "http://192.168.1.19/phanmembanhang/" },
-  { name: "Quán Cafe", icon: Coffee, href: "http://192.168.1.19/phanmembanhang/" },
+  { name: "Tạp hóa", icon: Package, href: "/phanmembanhang" },
+  { name: "Quán Cafe", icon: Coffee, href: "/phanmembanhang" },
   { name: "Nhà hàng", icon: Utensils, href: "/under-construction" },
   { name: "Khách sạn", icon: Hotel, href: "/under-construction" },
   { name: "Spa", icon: Users, href: "/under-construction" },
