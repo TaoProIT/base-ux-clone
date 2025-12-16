@@ -1,3 +1,5 @@
+"use client";
+
 import { Phone, MessageCircle, ArrowUp } from "lucide-react";
 import { useState, useEffect } from "react";
 
