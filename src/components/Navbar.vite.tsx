@@ -142,9 +142,9 @@ export const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" className="text-[#507588] hover:text-[#0f426c]">
+            {/* <Button variant="ghost" className="text-[#507588] hover:text-[#0f426c]">
               Đăng nhập
-            </Button>
+            </Button> */}
             <Link to="/contact">
               <Button variant="hero" size="default">
                 Đăng ký Demo
@@ -234,13 +234,13 @@ export const Navbar = () => {
             ))}
 
             {/* Mobile CTA Buttons */}
-            <div className="pt-4 mt-4 border-t border-[#c3e8ff] space-y-3">
+            {/* <div className="pt-4 mt-4 border-t border-[#c3e8ff] space-y-3">
               <Button
                 variant="ghost"
                 className="w-full justify-center py-3 text-base text-[#507588] hover:text-[#0f426c]"
               >
                 Đăng nhập
-              </Button>
+              </Button> */}
               <Link to="/contact" onClick={handleMobileMenuClose}>
                 <Button
                   variant="hero"

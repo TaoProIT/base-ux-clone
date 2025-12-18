@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ContactPageClient } from "./ContactPageClient";
 
 // SEO Metadata for Contact page
@@ -26,5 +27,9 @@ export const metadata: Metadata = {
 
 // Server Component wrapper - the actual form is in a Client Component
 export default function ContactPage() {
-  return <ContactPageClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <ContactPageClient />
+    </Suspense>
+  );
 }

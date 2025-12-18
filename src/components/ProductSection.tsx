@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Briefcase, Users, TrendingUp, Building2,
@@ -167,12 +168,12 @@ export const ProductSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
-              <a href="/under-construction" className="flex-1 sm:flex-initial">
+              <Link href="/under-construction" className="flex-1 sm:flex-initial">
                 <Button variant="heroOutline" className="w-full">Xem chi tiết</Button>
-              </a>
-              <a href="/contact" className="flex-1 sm:flex-initial">
+              </Link>
+              <Link href="/contact" className="flex-1 sm:flex-initial">
                 <Button variant="hero" className="w-full">Demo tính năng</Button>
-              </a>
+              </Link>
             </div>
           </div>
 

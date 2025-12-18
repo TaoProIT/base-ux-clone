@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export const HeroSection = () => {
   return (
     <section className="relative min-h-screen pt-16 sm:pt-20 lg:pt-24 overflow-hidden bg-gradient-to-b from-[#f4fbff] to-[#d2eaf7]">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-hero" />
-      
+
       {/* Animated background elements */}
       <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-[#8fc0db]/20 rounded-full blur-3xl animate-pulse-glow" />
       <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 bg-[#0f426c]/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
@@ -21,7 +22,7 @@ export const HeroSection = () => {
               doanh nghiệp{" "}
               <span className="text-[#3087fe]">toàn diện</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg lg:text-xl text-[#507588] max-w-xl leading-relaxed">
               Chuyên cung cấp giải pháp SOF ERP, SOF HRM, SOF POS cho doanh nghiệp Việt Nam.
               <br className="hidden sm:block" />
@@ -30,11 +31,11 @@ export const HeroSection = () => {
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
-              <a href="/contact">
+              <Link href="/contact">
                 <Button variant="hero" size="lg" className="text-sm sm:text-base">
                   Đăng ký Demo
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -44,7 +45,7 @@ export const HeroSection = () => {
             <div className="relative animate-float">
               {/* Glow effect */}
               <div className="absolute -inset-2 sm:-inset-4 bg-[#0f426c]/10 rounded-3xl blur-2xl" />
-              
+
               {/* Main card */}
               <div className="relative bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 shadow-xl border border-[#a7d5ec]">
                 {/* Dashboard header */}
