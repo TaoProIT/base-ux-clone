@@ -8,7 +8,7 @@ export const companyInfo = {
   hotline: ["0933 549 469", "0932 518 569"],
   email: "cskh@sof.vn",
   supportEmail: "cskh@sof.vn",
-  website: "www.sof.vn",
+  website: "sof.com.vn",
   foundedYear: 2011,
   social: {
     facebook: "https://facebook.com/SOF",

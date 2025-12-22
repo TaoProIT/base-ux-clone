@@ -300,7 +300,7 @@ export default function WarrantyPolicyPage() {
               <div className="flex flex-wrap justify-center gap-6">
                 <div className="flex items-center gap-2">
                   <Phone className="w-5 h-5 text-[#3087fe]" />
-                  <span className="text-gray-600">Hotline: 1900 xxxx</span>
+                  <span className="text-gray-600">Hotline: 0933549469</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-5 h-5 text-[#3087fe]" />

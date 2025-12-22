@@ -27,7 +27,7 @@ const trustedCompanies = [
   { 
     name: "BECAMEX", 
     description: "BECAMEX Bình Dương",
-    logo: "https://scontent-lga3-3.xx.fbcdn.net/v/t39.30808-1/306763872_581557707100528_4553299697214616966_n.png?stp=dst-png_s200x200&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=klfOVdNY874Q7kNvwFJTVF6&_nc_oc=Adm7lR2jl8wr3tgcR9puXP8VzLFH-H3BYaOujNVTCvd7xG9mXrN1pD2RZoKKsu513L0&_nc_zt=24&_nc_ht=scontent-lga3-3.xx&_nc_gid=exCOwcWKhGQJef5vOlf6TA&oh=00_Afk0_3AmDL8gU-xmhA2R9rEDJL8KhS3_s5ogMhFpDXqPLw&oe=6945723C"
+    logo: "https://forbes.baovanhoa.vn/wp-content/uploads/2022/06/LogoTop50_Becamex.jpg"
   },
 ];
 

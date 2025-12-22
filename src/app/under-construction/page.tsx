@@ -35,15 +35,15 @@ export default function UnderConstructionPage() {
             <div className="space-y-3">
               <div className="flex items-center justify-center gap-2 text-gray-600">
                 <Phone className="w-4 h-4 text-[#3087fe]" />
-                <span>Hotline: 1900 xxxx</span>
+                <span>Hotline: 0933549469</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-gray-600">
                 <Mail className="w-4 h-4 text-[#3087fe]" />
-                <span>Email: contact@sof.vn</span>
+                <span>Email: cskh@sof.vn</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-gray-600">
                 <Globe className="w-4 h-4 text-[#3087fe]" />
-                <span>Website: www.sof.vn</span>
+                <span>Website: sof.com.vn</span>
               </div>
             </div>
           </div>
