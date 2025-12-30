@@ -48,8 +48,33 @@ export async function POST(request: Request) {
             console.warn("Standard JSON parse failed, attempting extraction...");
             console.log("Response Text (first 1000 chars):", originalText.substring(0, 1000));
 
-            // 3. Helper to extract last valid JSON object/array using bracket balancing
-            // This handles nested structures and concatenated JSON more reliably than regex.
+            // 3. Helper to extract FIRST valid JSON object/array using bracket balancing
+            // This handles concatenated JSON (e.g., {...error...}[...data...]) by extracting the FIRST complete structure.
+            const extractFirstJson = (text: string, startChar: string, endChar: string) => {
+                const start = text.indexOf(startChar);
+                if (start === -1) return null;
+
+                let balance = 0;
+                for (let i = start; i < text.length; i++) {
+                    const c = text[i];
+                    if (c === startChar) balance++;
+                    else if (c === endChar) balance--;
+
+                    if (balance === 0) {
+                        try {
+                            const jsonStr = text.substring(start, i + 1);
+                            console.log("Attempting to parse extracted JSON:", jsonStr.substring(0, 200));
+                            return JSON.parse(jsonStr);
+                        } catch (e) {
+                            console.log("Failed to parse extracted JSON segment");
+                            return null;
+                        }
+                    }
+                }
+                return null;
+            };
+
+            // Helper to extract LAST valid JSON (for array data at the end)
             const extractLastJson = (text: string, startChar: string, endChar: string) => {
                 const end = text.lastIndexOf(endChar);
                 if (end === -1) return null;
@@ -63,10 +88,8 @@ export async function POST(request: Request) {
                     if (balance === 0) {
                         try {
                             const jsonStr = text.substring(i, end + 1);
-                            console.log("Attempting to parse extracted JSON:", jsonStr.substring(0, 200));
                             return JSON.parse(jsonStr);
                         } catch (e) {
-                            console.log("Failed to parse extracted JSON segment");
                             return null;
                         }
                     }
@@ -74,17 +97,17 @@ export async function POST(request: Request) {
                 return null;
             };
 
-            // 1. Try Object FIRST (Login/Register returns Object, often with trailing [] noise)
-            const objectData = extractLastJson(responseText, '{', '}');
+            // 1. Try Object FIRST (Login/Register returns Object as FIRST JSON in concatenated response)
+            const objectData = extractFirstJson(responseText, '{', '}');
             if (objectData) {
-                // console.log("✅ Successfully extracted object data");
+                console.log("✅ Successfully extracted FIRST object data (login/register)");
                 return NextResponse.json(objectData);
             }
 
-            // 2. Try Array (Pricing returns Array at end)
+            // 2. Try Array LAST (Pricing returns Array at end, when no object is present)
             const arrayData = extractLastJson(responseText, '[', ']');
             if (arrayData) {
-                console.log("✅ Successfully extracted array data");
+                console.log("✅ Successfully extracted LAST array data (pricing)");
                 return NextResponse.json(arrayData);
             }
 
