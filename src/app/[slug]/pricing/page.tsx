@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Star } from "lucide-react";
 import {
-  ProductPricing,
-  ProductPricingComparison,
   ProductFAQ,
   ProductCTA,
   ProductSubNav,
+  ProductPricingDynamic,
 } from "@/components/product-page";
 import { FloatingButtons } from "@/components/FloatingButtons";
 import { getProductData, getAllProductSlugs } from "@/config/products";
@@ -25,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductData(slug);
-  
+
   if (!product) {
     return {
       title: "Không tìm thấy sản phẩm",
@@ -40,15 +39,6 @@ export async function generateMetadata({
     },
   };
 }
-
-// Default comparison rows
-const defaultComparisonRows = [
-  { feature: "Số người dùng", basic: "5", pro: "Không giới hạn", full: "Không giới hạn" },
-  { feature: "Tính năng cơ bản", basic: "✓", pro: "✓", full: "✓" },
-  { feature: "Tính năng nâng cao", basic: "—", pro: "✓", full: "✓" },
-  { feature: "API tích hợp", basic: "—", pro: "—", full: "✓" },
-  { feature: "Hỗ trợ kỹ thuật", basic: "Email", pro: "24/7 Điện thoại", full: "Account Manager" },
-];
 
 // Default FAQ items
 const defaultFaqItems = [
@@ -115,11 +105,8 @@ export default async function PricingPage({
         </div>
       </section>
 
-      {/* Pricing Plans */}
-      <ProductPricing plans={product.pricingPlans} />
-
-      {/* Comparison Table */}
-      <ProductPricingComparison rows={defaultComparisonRows} />
+      {/* Pricing Plans & Comparison - Dynamic */}
+      <ProductPricingDynamic />
 
       {/* FAQ */}
       <ProductFAQ items={defaultFaqItems} />

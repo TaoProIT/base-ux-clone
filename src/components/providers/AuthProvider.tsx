@@ -13,7 +13,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
-    login: (userData: User) => void;
+    login: (userData: User, remember?: boolean) => void;
     logout: () => void;
     isLoading: boolean;
 }
@@ -26,28 +26,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const router = useRouter();
 
     useEffect(() => {
-        // Check for saved user in localStorage on mount
-        const savedUser = localStorage.getItem("sof_user");
+        // Check for saved user in localStorage or sessionStorage on mount
+        const savedUserLocal = localStorage.getItem("sof_user");
+        const savedUserSession = sessionStorage.getItem("sof_user");
+
+        const savedUser = savedUserLocal || savedUserSession;
+
         if (savedUser) {
             try {
                 setUser(JSON.parse(savedUser));
             } catch (e) {
                 console.error("Failed to parse user data", e);
                 localStorage.removeItem("sof_user");
+                sessionStorage.removeItem("sof_user");
             }
         }
         setIsLoading(false);
     }, []);
 
-    const login = (userData: User) => {
+    const login = (userData: User, remember: boolean = true) => {
         setUser(userData);
-        localStorage.setItem("sof_user", JSON.stringify(userData));
-        // Set cookie for token if needed for server requests, but we'll stick to client-side for now
+        if (remember) {
+            localStorage.setItem("sof_user", JSON.stringify(userData));
+            sessionStorage.removeItem("sof_user"); // Ensure it's not in session if remembered
+        } else {
+            sessionStorage.setItem("sof_user", JSON.stringify(userData));
+            localStorage.removeItem("sof_user"); // Ensure it's not in local if not remembered
+        }
     };
 
     const logout = () => {
         setUser(null);
         localStorage.removeItem("sof_user");
+        sessionStorage.removeItem("sof_user");
         router.push("/login");
     };
 

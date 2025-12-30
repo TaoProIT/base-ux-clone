@@ -8,3 +8,4 @@ export { ProductPricing, ProductPricingComparison, ProductFAQ } from "./ProductP
 export { ProductDetailedFeatures, ProductFeatureList } from "./ProductDetailedFeatures";
 export { ProductNav, productList } from "./ProductNav";
 export { default as ProductSubNav } from "./ProductSubNav";
+export { ProductPricingDynamic } from "./ProductPricingDynamic";

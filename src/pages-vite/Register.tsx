@@ -305,7 +305,7 @@ const Register = () => {
                                                 id="phone"
                                                 name="phone"
                                                 type="tel"
-                                                placeholder="0912 345 678"
+                                                placeholder="0123 456 789"
                                                 value={formData.phone}
                                                 onChange={handleInputChange}
                                                 className="pl-10 h-12 border-[#a7d5ec] focus:border-[#0f426c] focus:ring-[#0f426c] bg-white"

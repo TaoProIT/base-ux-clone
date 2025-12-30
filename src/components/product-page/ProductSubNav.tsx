@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  Home, 
-  Sparkles, 
-  CreditCard, 
+import {
+  Home,
+  Sparkles,
+  CreditCard,
   FileText,
 } from "lucide-react";
 
@@ -39,7 +39,7 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
     },
     {
       label: "Bảng giá",
-      href: `${basePath}/pricing`,
+      href: productSlug === 'phan-mem-ban-hang' && pathname === basePath ? "#pricing" : `${basePath}/pricing`,
       icon: <CreditCard className="w-4 h-4" />,
     },
     {
@@ -57,7 +57,7 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
   };
 
   return (
-    <nav 
+    <nav
       className="fixed top-16 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm"
       aria-label={`Điều hướng ${productName || 'sản phẩm'}`}
     >
@@ -75,8 +75,8 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
                   className={`
                     inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium
                     transition-all duration-200 ease-in-out
-                    ${active 
-                      ? "bg-[var(--sof-primary)] text-white shadow-md" 
+                    ${active
+                      ? "bg-[var(--sof-primary)] text-white shadow-md"
                       : "text-gray-600 hover:text-[var(--sof-primary)] hover:bg-gray-100"
                     }
                   `}
@@ -103,8 +103,8 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
                     className={`
                       inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium
                       whitespace-nowrap transition-all duration-200
-                      ${active 
-                        ? "bg-[var(--sof-primary)] text-white shadow-md" 
+                      ${active
+                        ? "bg-[var(--sof-primary)] text-white shadow-md"
                         : "text-gray-600 bg-gray-100 hover:bg-gray-200"
                       }
                     `}

@@ -53,7 +53,7 @@ export default function LoginPage() {
                     token: response.data.token,
                     role: response.data.role,
                     email: response.data.email,
-                });
+                }, formData.rememberMe);
 
                 // Redirect
                 router.push("/");

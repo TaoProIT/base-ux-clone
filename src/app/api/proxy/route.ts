@@ -6,17 +6,23 @@ export async function POST(request: Request) {
         const body = await request.json();
 
         // Config: Prefer Env vars, fallback to hardcoded strings
-        const TARGET_URL = process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.96/erpdung-hao/services/erpv1/services.sof.vn/index.php";
-        const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || "SOF2025DEVELOPER";
+        const TARGET_URL = process.env.NEXT_PUBLIC_API_URL;
+        const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
         console.log("Proxy Request to:", TARGET_URL);
         // console.log("Proxy Body:", JSON.stringify(body)); // Uncomment if deep debug needed
+
+        // Extract headers to forward
+        const username = request.headers.get("username") || "";
+        const role = request.headers.get("role") || "";
 
         const response = await fetch(TARGET_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-SOF-USER-TOKEN": API_TOKEN,
+                "username": username,
+                "role": role
             },
             body: JSON.stringify(body),
         });
@@ -40,34 +46,67 @@ export async function POST(request: Request) {
             return NextResponse.json(data);
         } catch (jsonError) {
             console.warn("Standard JSON parse failed, attempting extraction...");
+            console.log("Response Text (first 1000 chars):", originalText.substring(0, 1000));
 
-            // 3. Last Resort: Try to find the first complete JSON object "{...}"
-            // This handles cases like: "[warning] {...} []" or "{...}garbage"
-            try {
-                const jsonMatch = responseText.match(/(\{[\s\S]*\})/);
-                if (jsonMatch) {
-                    const potentialJson = jsonMatch[0];
-                    // Careful: greedy regex might match too much if multiple objects. 
-                    // Let's try a simpler approach: parse from first '{' to last '}'
-                    const firstOpen = responseText.indexOf('{');
-                    const lastClose = responseText.lastIndexOf('}');
+            // 3. Helper to extract last valid JSON object/array using bracket balancing
+            // This handles nested structures and concatenated JSON more reliably than regex.
+            const extractLastJson = (text: string, startChar: string, endChar: string) => {
+                const end = text.lastIndexOf(endChar);
+                if (end === -1) return null;
 
-                    if (firstOpen !== -1 && lastClose !== -1 && lastClose > firstOpen) {
-                        const extracted = responseText.substring(firstOpen, lastClose + 1);
-                        const data = JSON.parse(extracted);
-                        return NextResponse.json(data);
+                let balance = 0;
+                for (let i = end; i >= 0; i--) {
+                    const c = text[i];
+                    if (c === endChar) balance++;
+                    else if (c === startChar) balance--;
+
+                    if (balance === 0) {
+                        try {
+                            const jsonStr = text.substring(i, end + 1);
+                            console.log("Attempting to parse extracted JSON:", jsonStr.substring(0, 200));
+                            return JSON.parse(jsonStr);
+                        } catch (e) {
+                            console.log("Failed to parse extracted JSON segment");
+                            return null;
+                        }
                     }
                 }
-            } catch (e) {
-                // Ignore extraction error, stick to original error
+                return null;
+            };
+
+            // 1. Try Object FIRST (Login/Register returns Object, often with trailing [] noise)
+            const objectData = extractLastJson(responseText, '{', '}');
+            if (objectData) {
+                // console.log("✅ Successfully extracted object data");
+                return NextResponse.json(objectData);
             }
 
-            console.error("Backend response is not JSON:", originalText);
+            // 2. Try Array (Pricing returns Array at end)
+            const arrayData = extractLastJson(responseText, '[', ']');
+            if (arrayData) {
+                console.log("✅ Successfully extracted array data");
+                return NextResponse.json(arrayData);
+            }
+
+            // 3. Last resort: Try to find JSON using regex for common PHP warning patterns
+            const jsonMatch = originalText.match(/(\{[\s\S]*\}|\[[\s\S]*\])$/);
+            if (jsonMatch) {
+                try {
+                    const data = JSON.parse(jsonMatch[1]);
+                    console.log("✅ Successfully extracted JSON using regex fallback");
+                    return NextResponse.json(data);
+                } catch (e) {
+                    console.log("❌ Regex fallback also failed");
+                }
+            }
+
+            console.error("❌ All JSON extraction methods failed");
+            console.error("Full Backend Response:", originalText);
             return NextResponse.json(
                 {
                     success: false,
                     message: "Server backend trả về dữ liệu không hợp lệ (không phải JSON)",
-                    debug_text: originalText.substring(0, 500) // Increase debug length
+                    debug_text: originalText.substring(0, 1000) // Increase debug length
                 },
                 { status: 500 }
             );

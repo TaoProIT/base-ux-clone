@@ -7,6 +7,7 @@ import {
   ProductTestimonials,
   ProductCTA,
   ProductSubNav,
+  ProductPricingDynamic,
 } from "@/components/product-page";
 import { FloatingButtons } from "@/components/FloatingButtons";
 import { getProductData, getAllProductSlugs } from "@/config/products";
@@ -141,6 +142,11 @@ export default async function ProductPage({
         subtitle="Xem những đánh giá từ khách hàng đã sử dụng."
         testimonials={product.testimonials}
       />
+
+      {/* Dynamic Pricing for Cafe/Sales Data */}
+      {slug === 'phan-mem-ban-hang' && (
+        <ProductPricingDynamic />
+      )}
 
       {/* CTA Section */}
       <ProductCTA

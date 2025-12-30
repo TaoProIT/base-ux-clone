@@ -27,11 +27,10 @@ export function ProductPricing({ plans }: ProductPricingProps) {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`relative rounded-xl p-8 flex flex-col transition-all duration-300 ${
-                plan.isFeatured
-                  ? "bg-gradient-to-br from-[#197dd3] to-[#1565c0] text-white scale-105 shadow-xl"
-                  : "bg-white shadow-md hover:shadow-lg hover:-translate-y-1"
-              }`}
+              className={`pricing-card relative rounded-xl p-8 flex flex-col transition-all duration-300 ${plan.isFeatured
+                ? "bg-gradient-to-br from-[#197dd3] to-[#1565c0] text-white scale-105 shadow-xl"
+                : "bg-white shadow-md hover:shadow-lg hover:-translate-y-1"
+                }`}
             >
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-full uppercase">
@@ -40,14 +39,14 @@ export function ProductPricing({ plans }: ProductPricingProps) {
               )}
 
               {/* Header */}
-              <div className="text-center pb-6 border-b border-gray-200 mb-6">
-                <h3 className={`text-2xl font-bold mb-2 ${plan.isFeatured ? "text-white" : "text-[#0f426c]"}`}>
+              <div className="pricing-header text-center pb-6 border-b border-gray-200 mb-6">
+                <h3 className="pricing-title text-2xl font-bold mb-2">
                   {plan.name}
                 </h3>
                 <p className={`text-sm ${plan.isFeatured ? "opacity-80" : "text-gray-500"}`}>
                   {plan.description}
                 </p>
-                <div className={`text-3xl font-extrabold mt-4 ${plan.isFeatured ? "text-white" : "text-[#197dd3]"}`}>
+                <div className={`pricing-price text-3xl font-extrabold mt-4 ${plan.isFeatured ? "text-white" : "text-[#197dd3]"}`}>
                   {plan.price}
                   {plan.priceNote && (
                     <span className={`text-base font-normal ${plan.isFeatured ? "opacity-80" : "text-gray-600"}`}>
@@ -58,7 +57,7 @@ export function ProductPricing({ plans }: ProductPricingProps) {
               </div>
 
               {/* Features */}
-              <ul className="flex-1 space-y-3 mb-8">
+              <ul className="pricing-features flex-1 space-y-3 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-3">
                     <Check className={`w-5 h-5 flex-shrink-0 ${plan.isFeatured ? "text-white" : "text-green-500"}`} />
@@ -72,13 +71,12 @@ export function ProductPricing({ plans }: ProductPricingProps) {
               {/* CTA */}
               <Link
                 href={plan.ctaLink}
-                className={`block w-full text-center py-3 rounded-lg font-semibold transition-colors ${
-                  plan.isFeatured
-                    ? "bg-white text-[#197dd3] hover:bg-gray-100"
-                    : index === 2
+                className={`block w-full text-center py-3 rounded-lg font-semibold transition-colors ${plan.isFeatured
+                  ? "bg-white text-[#197dd3] hover:bg-gray-100"
+                  : index === 2
                     ? "bg-[#197dd3] text-white hover:bg-[#1565c0]"
                     : "border-2 border-[#197dd3] text-[#197dd3] hover:bg-[#197dd3] hover:text-white"
-                }`}
+                  }`}
               >
                 {plan.cta}
               </Link>
@@ -127,7 +125,7 @@ export function ProductPricingComparison({ rows }: ProductPricingComparisonProps
                 <th className="p-4 text-center border-b-2 border-gray-200">Full</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="feature-comparison-body">
               {rows.map((row, index) => (
                 <tr key={index}>
                   <td className="p-4 border-b border-gray-200">{row.feature}</td>
