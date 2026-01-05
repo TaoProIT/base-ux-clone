@@ -169,7 +169,12 @@ export const ProductSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <Link href="/under-construction" className="flex-1 sm:flex-initial">
-                <Button variant="heroOutline" className="w-full">Xem chi tiết</Button>
+                <Button
+                  variant="heroOutline"
+                  className="w-full"
+                >
+                  Xem chi tiết
+                </Button>
               </Link>
               <Link href="/contact" className="flex-1 sm:flex-initial">
                 <Button variant="hero" className="w-full">Demo tính năng</Button>

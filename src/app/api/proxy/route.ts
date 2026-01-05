@@ -7,6 +7,9 @@ export async function POST(request: Request) {
 
         // Config: Prefer Env vars, fallback to hardcoded strings
         const TARGET_URL = process.env.NEXT_PUBLIC_API_URL;
+        if (!TARGET_URL) {
+            return NextResponse.json({ success: false, message: "API URL not configured" }, { status: 500 });
+        }
         const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
         console.log("Proxy Request to:", TARGET_URL);
@@ -20,7 +23,7 @@ export async function POST(request: Request) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "X-SOF-USER-TOKEN": API_TOKEN,
+                ...(API_TOKEN ? { "X-SOF-USER-TOKEN": API_TOKEN } : {}),
                 "username": username,
                 "role": role
             },

@@ -282,10 +282,6 @@ export const productConfigs: Record<string, ProductData> = {
     slug: "phan-mem-erp",
     name: "Phần Mềm ERP",
     shortName: "ERP",
-    tagline: "Hệ Thống Quản Trị Doanh Nghiệp",
-    description: "Giải pháp ERP toàn diện tích hợp tài chính, kế toán, kho vận, sản xuất và nhân sự trong một hệ thống thống nhất.",
-    badge: "Giải pháp ERP #1 Việt Nam",
-    heroImage: "/products/phan-mem-erp/hero.png",
     ...defaultLoadingData,
     isLoading: true,
     seo: {
@@ -301,10 +297,6 @@ export const productConfigs: Record<string, ProductData> = {
     slug: "phan-mem-nhan-su",
     name: "Phần Mềm Nhân Sự",
     shortName: "HRM",
-    tagline: "Quản Lý Nhân Sự Thông Minh",
-    description: "Hệ thống HRM tự động hóa chấm công, tính lương, đánh giá KPI và quản lý toàn bộ vòng đời nhân viên.",
-    badge: "Giải pháp HRM hiện đại",
-    heroImage: "/products/phan-mem-nhan-su/hero.png",
     ...defaultLoadingData,
     isLoading: true,
     seo: {

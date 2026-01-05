@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { authService } from "@/services/authService";
 import { useAuth } from "@/components/providers/AuthProvider";
+import { getGoogleAuthCode } from "@/lib/googleAuth";
 import {
     Eye,
     EyeOff,
@@ -104,6 +105,35 @@ export default function RegisterPage() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleGoogleLogin = async () => {
+        setIsLoading(true);
+        try {
+            const code = await getGoogleAuthCode();
+            const response = await authService.loginWithGoogle(code);
+
+            if (response.success) {
+                toast.success(response.message || "Đăng nhập Google thành công!");
+
+                login({
+                    username: response.data.username,
+                    name: response.data.name,
+                    token: response.data.token,
+                    role: response.data.role,
+                    email: response.data.email,
+                });
+
+                router.push("/");
+            } else {
+                toast.error(response.message || "Đăng nhập Google thất bại");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Đăng nhập Google thất bại, vui lòng thử lại");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const passwordStrength = () => {
@@ -265,6 +295,8 @@ export default function RegisterPage() {
                                     <Button
                                         variant="outline"
                                         className="w-full h-12 border-[#a7d5ec] hover:bg-[#f4fbff] hover:border-[#0f426c] transition-all duration-300 relative"
+                                        onClick={handleGoogleLogin}
+                                        disabled={isLoading}
                                     >
                                         <Chrome className="w-5 h-5 text-[#4285F4] absolute left-4" />
                                         <span className="text-[#0f426c]">Đăng ký với Google</span>

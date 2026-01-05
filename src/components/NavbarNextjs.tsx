@@ -46,6 +46,7 @@ import { SolutionsDropdown } from "./SolutionsDropdown";
 import { IndustriesDropdown } from "./IndustriesDropdown";
 import { NewsDropdown } from "./NewsDropdown";
 import { useAuth } from "@/components/providers/AuthProvider";
+import { useCart } from "@/components/providers/CartProvider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -104,6 +105,7 @@ export const Navbar = () => {
   const pathname = usePathname();
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { user, logout } = useAuth();
+  const { cartCount } = useCart();
 
   const getMobileDropdownItems = (id: string) => {
     switch (id) {
@@ -208,9 +210,9 @@ export const Navbar = () => {
                 </Button>
               </Link>
             )}
-            <Link href="/contact">
+            <Link href="/cart">
               <Button variant="hero" size="default">
-                Đăng ký Demo
+                Giỏ Hàng{cartCount > 0 ? ` (${cartCount})` : ""}
               </Button>
             </Link>
           </div>

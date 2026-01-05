@@ -7,6 +7,7 @@ import { AOSProvider } from "@/components/providers/AOSProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { AuthProvider } from "@/components/providers/AuthProvider";
+import { CartProvider } from "@/components/providers/CartProvider";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["vietnamese", "latin"],
@@ -116,11 +117,13 @@ export default function RootLayout({
       <body className={`${beVietnamPro.variable} font-sans antialiased`}>
         <QueryProvider>
           <AuthProvider>
-            <AOSProvider>
-              <LayoutWrapper>{children}</LayoutWrapper>
-              <Toaster />
-              <Sonner />
-            </AOSProvider>
+            <CartProvider>
+              <AOSProvider>
+                <LayoutWrapper>{children}</LayoutWrapper>
+                <Toaster />
+                <Sonner />
+              </AOSProvider>
+            </CartProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

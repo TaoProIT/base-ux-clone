@@ -19,6 +19,9 @@ import {
 
 export function ContactPageClient() {
   const searchParams = useSearchParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiToken = process.env.NEXT_PUBLIC_API_TOKEN;
   const [formData, setFormData] = useState({
     tenKH: "",
     nguoiDaiDien: "",
@@ -70,11 +73,82 @@ export function ContactPageClient() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    alert(
-      "Cảm ơn bạn đã gửi yêu cầu! Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất."
-    );
+    if (!apiUrl) {
+      alert("Thiếu cấu hình API (NEXT_PUBLIC_API_URL)");
+      return;
+    }
+
+    const requiredFields = ["tenKH", "nguoiDaiDien", "sdt", "service", "ngayLam", "ngayKetThuc"];
+    const missing = requiredFields.filter((key) => !(formData as Record<string, string | boolean>)[key]);
+    if (missing.length > 0) {
+      alert("Vui lòng điền đầy đủ các trường bắt buộc.");
+      return;
+    }
+
+    const phoneClean = formData.sdt.replace(/\s+/g, "");
+    const phoneRegex = /^[0-9]{10,11}$/;
+    if (!phoneRegex.test(phoneClean)) {
+      alert("Số điện thoại chưa đúng định dạng (10-11 số).");
+      return;
+    }
+
+    const payload = {
+      table: "sl_lv0013",
+      func: "insert",
+      maKH: "CUS" + Date.now(),
+      tenKH: formData.tenKH,
+      email: formData.email,
+      sdt: phoneClean,
+      nguoiDaiDien: formData.nguoiDaiDien,
+      ngayLam: formData.ngayLam,
+      ngayKetThuc: formData.ngayKetThuc,
+      itemId: formData.service,
+      ghiChu: formData.message,
+    };
+
+    setIsSubmitting(true);
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(apiToken ? { "SOF-User-Token": apiToken } : {}),
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        const text = await response.text();
+        let data: unknown = null;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          console.error("Response is not JSON", err, text);
+        }
+        if (!response.ok) {
+          throw new Error(`API error ${response.status}`);
+        }
+        return data;
+      })
+      .then(() => {
+        alert("Cảm ơn bạn! Yêu cầu đã được gửi. Chúng tôi sẽ liên hệ sớm.");
+        setFormData((prev) => ({
+          ...prev,
+          tenKH: "",
+          nguoiDaiDien: "",
+          email: "",
+          sdt: "",
+          service: "",
+          ngayLam: prev.ngayLam,
+          ngayKetThuc: prev.ngayKetThuc,
+          message: "",
+          privacy: false,
+        }));
+      })
+      .catch((error) => {
+        console.error("Send contact failed", error);
+        alert("Gửi yêu cầu thất bại, vui lòng thử lại hoặc gọi hotline 0933549469.");
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
@@ -426,9 +500,10 @@ export function ContactPageClient() {
                     variant="hero"
                     size="lg"
                     className="w-full flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
                   >
                     <Send className="w-5 h-5" />
-                    Gửi yêu cầu
+                    {isSubmitting ? "Đang gửi..." : "Gửi yêu cầu"}
                   </Button>
                 </form>
               </div>
