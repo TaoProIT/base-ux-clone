@@ -137,6 +137,13 @@ export function ProductsGrid() {
     // Combine API categories with static items
     const allItems = [...categories, ...staticItems];
 
+    const hardwareItems = allItems.filter((item) => (item as any).phanLoai === 'PHANCUNG');
+    const softwareItems = allItems.filter((item) => (item as any).phanLoai !== 'PHANCUNG');
+    const sections = [
+        { title: 'Phần mềm', items: softwareItems },
+        { title: 'Phần cứng', items: hardwareItems },
+    ];
+
     return (
         <section className="py-16">
             <div className="container mx-auto px-4 lg:px-8">
@@ -155,38 +162,48 @@ export function ProductsGrid() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {allItems.map((item, index) => {
-                        const maDanhMuc = item.maDanhMuc || '';
-                        const Icon = categoryIcons[maDanhMuc] || LayoutGrid;
-                        const color = categoryColors[maDanhMuc] || defaultColor;
-                        const href = (item as any).isStatic 
-                            ? (item as any).href 
-                            : `/${categoryToSlug(maDanhMuc)}`;
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {sections.map((section) => (
+                        <div key={section.title} className="space-y-4">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-xl font-semibold text-gray-800">{section.title}</h3>
+                                <span className="text-xs text-gray-500">{section.items.length} mục</span>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                {section.items.map((item, index) => {
+                                    const maDanhMuc = (item as any).maDanhMuc || '';
+                                    const Icon = categoryIcons[maDanhMuc] || LayoutGrid;
+                                    const color = categoryColors[maDanhMuc] || defaultColor;
+                                    const href = (item as any).isStatic 
+                                        ? (item as any).href 
+                                        : `/${categoryToSlug(maDanhMuc)}`;
 
-                        return (
-                            <Link
-                                key={maDanhMuc || index}
-                                href={href}
-                                className={`bg-white rounded-xl p-6 hover:shadow-xl transition-all duration-300 border-2 border-transparent ${color.border} group`}
-                            >
-                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${color.from} ${color.to} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                    <Icon className="w-7 h-7 text-white" />
-                                </div>
-                                <h3 className="font-bold text-gray-800 mb-2">
-                                    {item.tenDanhMuc}
-                                </h3>
-                                <p className="text-sm text-gray-500 line-clamp-2 mb-3">
-                                    {item.moTa || 'Giải pháp phần mềm chuyên nghiệp'}
-                                </p>
-                                {(item as Category).soSanPham !== undefined && (
-                                    <span className="inline-flex items-center text-xs text-[#197dd3] font-medium">
-                                        {(item as Category).soSanPham} gói dịch vụ →
-                                    </span>
-                                )}
-                            </Link>
-                        );
-                    })}
+                                    return (
+                                        <Link
+                                            key={(maDanhMuc || '') + index}
+                                            href={href}
+                                            className={`bg-white rounded-xl p-5 hover:shadow-xl transition-all duration-300 border-2 border-transparent ${color.border} group`}
+                                        >
+                                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color.from} ${color.to} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                                                <Icon className="w-6 h-6 text-white" />
+                                            </div>
+                                            <h4 className="font-bold text-gray-800 mb-1 text-sm">
+                                                {item.tenDanhMuc}
+                                            </h4>
+                                            <p className="text-xs text-gray-500 line-clamp-2 mb-2">
+                                                {item.moTa || 'Giải pháp chuyên nghiệp'}
+                                            </p>
+                                            {(item as Category).soSanPham !== undefined && (
+                                                <span className="inline-flex items-center text-[11px] text-[#197dd3] font-medium">
+                                                    {(item as Category).soSanPham} gói dịch vụ →
+                                                </span>
+                                            )}
+                                        </Link>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

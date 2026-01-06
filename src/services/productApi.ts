@@ -14,6 +14,7 @@ export interface Category {
     maDanhMuc: string;
     tenDanhMuc: string;
     moTa: string | null;
+    phanLoai?: string | null;
     hinhAnh: string | null;
     maNhomCha: string | null;
     ngayTao: string | null;

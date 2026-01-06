@@ -30,6 +30,7 @@ interface Category {
   maDanhMuc: string;
   tenDanhMuc: string;
   moTa: string | null;
+  phanLoai?: string | null;
   soSanPham?: number;
 }
 
@@ -150,6 +151,13 @@ export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
     ),
   ];
 
+  const hardwareItems = allItems.filter((item) => (item as Category).phanLoai === 'PHANCUNG');
+  const softwareItems = allItems.filter((item) => (item as Category).phanLoai !== 'PHANCUNG');
+  const sections = [
+    { title: 'Phần mềm', items: softwareItems },
+    { title: 'Phần cứng', items: hardwareItems },
+  ];
+
   return (
     <>
       {/* Backdrop */}
@@ -184,29 +192,37 @@ export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
                   <span className="ml-2 text-gray-600">Đang tải...</span>
                 </div>
               ) : (
-                /* Grid */
-                <div className="grid grid-cols-4 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50">
-                  {allItems.map((item, index) => {
-                    const Icon = categoryIcons[item.maDanhMuc] || LayoutGrid;
-                    const color = categoryColors[item.maDanhMuc] || defaultColor;
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[480px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50">
+                  {sections.map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-semibold text-gray-800">{section.title}</h3>
+                        <span className="text-xs text-gray-500">{section.items.length} mục</span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {section.items.map((item, index) => {
+                          const Icon = categoryIcons[item.maDanhMuc] || LayoutGrid;
+                          const color = categoryColors[item.maDanhMuc] || defaultColor;
 
-                    return (
-                      <a
-                        key={item.maDanhMuc || index}
-                        href={(item as any).href}
-                        className={`bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent ${color.border} group cursor-pointer`}
-                        onClick={onClose}
-                      >
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color.from} ${color.to} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                          <Icon className="w-6 h-6 text-white" />
-                        </div>
-                        <h4 className="font-bold text-gray-800 mb-1 text-sm">{item.tenDanhMuc}</h4>
-                        <p className="text-xs text-gray-500 line-clamp-2">{item.moTa || 'Giải pháp chuyên nghiệp'}</p>
-                      </a>
-                    );
-                  })}
+                          return (
+                            <a
+                              key={(item.maDanhMuc || '') + index}
+                              href={(item as any).href}
+                              className={`bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent ${color.border} group cursor-pointer`}
+                              onClick={onClose}
+                            >
+                              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color.from} ${color.to} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                                <Icon className="w-6 h-6 text-white" />
+                              </div>
+                              <h4 className="font-bold text-gray-800 mb-1 text-sm">{item.tenDanhMuc}</h4>
+                              <p className="text-xs text-gray-500 line-clamp-2">{item.moTa || 'Giải pháp chuyên nghiệp'}</p>
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
 
-                  {/* Xem tất cả - CTA */}
                   <a
                     href="/products"
                     className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
