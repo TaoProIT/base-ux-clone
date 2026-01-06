@@ -4,13 +4,12 @@ import {
   ProductHero,
   ProductFeatures,
   ProductAbout,
-  ProductTestimonials,
   ProductCTA,
   ProductSubNav,
   ProductPricingDynamic,
 } from "@/components/product-page";
 import { FloatingButtons } from "@/components/FloatingButtons";
-import { getProductData, getAllProductSlugs } from "@/config/products";
+import { getProductData, getAllProductSlugs, slugToCategoryCode } from "@/config/products";
 
 // Generate static params for all products
 export async function generateStaticParams() {
@@ -135,17 +134,9 @@ export default async function ProductPage({
         ctaLink="/contact"
       />
 
-      {/* Testimonials Section */}
-      <ProductTestimonials
-        label="Khách hàng nói gì?"
-        title={`Được tin tưởng bởi hàng trăm doanh nghiệp`}
-        subtitle="Xem những đánh giá từ khách hàng đã sử dụng."
-        testimonials={product.testimonials}
-      />
-
-      {/* Dynamic Pricing for Cafe/Sales Data */}
-      {slug === 'phan-mem-ban-hang' && (
-        <ProductPricingDynamic />
+      {/* Dynamic Pricing for all product categories */}
+      {slug && (
+        <ProductPricingDynamic categoryCode={slugToCategoryCode(slug)} />
       )}
 
       {/* CTA Section */}

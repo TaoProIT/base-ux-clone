@@ -326,6 +326,44 @@ export const productConfigs: Record<string, ProductData> = {
     },
   },
 
+  // Nhà hàng
+  "phan-mem-nha-hang": {
+    slug: "phan-mem-nha-hang",
+    name: "Phần Mềm Nhà Hàng",
+    shortName: "Restaurant POS",
+    tagline: "Quản Lý Nhà Hàng Chuyên Nghiệp",
+    description: "POS nhà hàng với gọi món, bếp/bar, kho nguyên liệu, phân quyền và báo cáo chi tiết.",
+    badge: "Nhà hàng",
+    heroImage: "/products/phan-mem-ban-hang/hero.png",
+    ...defaultLoadingData,
+    isLoading: true,
+    seo: {
+      title: "Phần Mềm Quản Lý Nhà Hàng - SOF",
+      description: "Giải pháp POS nhà hàng: gọi món, bếp/bar, kho nguyên liệu, báo cáo.",
+      keywords: ["phần mềm nhà hàng", "POS nhà hàng", "quản lý bếp bar"],
+      canonical: "https://sof.com.vn/phan-mem-nha-hang",
+    },
+  },
+
+  // Quán ăn
+  "phan-mem-quan-an": {
+    slug: "phan-mem-quan-an",
+    name: "Phần Mềm Quán Ăn",
+    shortName: "Food POS",
+    tagline: "Quản Lý Quán Ăn & Chuỗi",
+    description: "Quản lý order, bếp, kho, thanh toán và báo cáo cho quán ăn/quán nhậu.",
+    badge: "Quán ăn",
+    heroImage: "/products/phan-mem-ban-hang/hero.png",
+    ...defaultLoadingData,
+    isLoading: true,
+    seo: {
+      title: "Phần Mềm Quản Lý Quán Ăn - SOF",
+      description: "POS quán ăn: order nhanh, bếp/bar, kho nguyên liệu, báo cáo chi tiết.",
+      keywords: ["phần mềm quán ăn", "POS quán ăn", "quản lý quán nhậu"],
+      canonical: "https://sof.com.vn/phan-mem-quan-an",
+    },
+  },
+
   // Kho Pallet
   "phan-mem-kho-pallet": {
     slug: "phan-mem-kho-pallet",
@@ -430,4 +468,40 @@ export function getProductData(slug: string): ProductData | null {
 // Get all product slugs for static generation
 export function getAllProductSlugs(): string[] {
   return Object.keys(productConfigs);
+}
+
+// Map slug to category code for API
+export function slugToCategoryCode(slug: string): string {
+  const mapping: Record<string, string> = {
+    'phan-mem-ban-hang': 'CAFE',
+    'phan-mem-khach-san': 'KHACHSAN',
+    'phan-mem-nha-hang': 'NHAHANG',
+    'phan-mem-quan-an': 'QUANAN',
+    'phan-mem-erp': 'ERP',
+    'phan-mem-nhan-su': 'NHANSU',
+    'phan-mem-van-tai-logistic': 'VANTAI',
+    'phan-mem-kho-pallet': 'KHO',
+    'phan-mem-quan-li-giu-xe': 'GIUXE',
+    'phan-mem-chu-ky-so': 'CHUKYSO',
+    'dich-vu-thiet-ke-web': 'WEB',
+  };
+  return mapping[slug] || slug.toUpperCase();
+}
+
+// Map category code to slug URL
+export function categoryCodeToSlug(categoryCode: string): string {
+  const mapping: Record<string, string> = {
+    'CAFE': 'phan-mem-ban-hang',
+    'KHACHSAN': 'phan-mem-khach-san',
+    'NHAHANG': 'phan-mem-nha-hang',
+    'QUANAN': 'phan-mem-quan-an',
+    'ERP': 'phan-mem-erp',
+    'NHANSU': 'phan-mem-nhan-su',
+    'VANTAI': 'phan-mem-van-tai-logistic',
+    'KHO': 'phan-mem-kho-pallet',
+    'GIUXE': 'phan-mem-quan-li-giu-xe',
+    'CHUKYSO': 'phan-mem-chu-ky-so',
+    'WEB': 'dich-vu-thiet-ke-web',
+  };
+  return mapping[categoryCode] || `san-pham/${categoryCode.toLowerCase()}`;
 }

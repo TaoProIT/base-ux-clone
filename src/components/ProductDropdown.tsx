@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   ShoppingCart,
   Store,
@@ -16,6 +17,8 @@ import {
   MessageSquare,
   Lock,
   LayoutGrid,
+  Globe,
+  Loader2,
 } from "lucide-react";
 
 interface ProductDropdownProps {
@@ -23,8 +26,129 @@ interface ProductDropdownProps {
   onClose: () => void;
 }
 
+interface Category {
+  maDanhMuc: string;
+  tenDanhMuc: string;
+  moTa: string | null;
+  soSanPham?: number;
+}
+
+// Icon mapping based on category code
+const categoryIcons: Record<string, React.ElementType> = {
+  'CAFE': Coffee,
+  'KHACHSAN': Hotel,
+  'NHAHANG': Utensils,
+  'QUANAN': Store,
+  'BANHANG': ShoppingCart,
+  'NHANSU': Users,
+  'ERP': Building2,
+  'VANTAI': Truck,
+  'KHO': Warehouse,
+  'GIUXE': Car,
+  'CHUKYSO': Lock,
+  'WEB': Globe,
+  'DUOC': Pill,
+  'CHAT': MessageSquare,
+};
+
+// Color mapping for categories
+const categoryColors: Record<string, { from: string; to: string; border: string }> = {
+  'CAFE': { from: 'from-amber-400', to: 'to-amber-600', border: 'hover:border-amber-400' },
+  'KHACHSAN': { from: 'from-violet-400', to: 'to-violet-600', border: 'hover:border-violet-400' },
+  'NHAHANG': { from: 'from-red-400', to: 'to-red-600', border: 'hover:border-red-400' },
+  'QUANAN': { from: 'from-orange-400', to: 'to-orange-600', border: 'hover:border-orange-400' },
+  'BANHANG': { from: 'from-blue-400', to: 'to-blue-600', border: 'hover:border-blue-400' },
+  'NHANSU': { from: 'from-pink-500', to: 'to-pink-700', border: 'hover:border-pink-400' },
+  'ERP': { from: 'from-indigo-400', to: 'to-indigo-600', border: 'hover:border-indigo-400' },
+  'VANTAI': { from: 'from-orange-500', to: 'to-orange-700', border: 'hover:border-orange-400' },
+  'KHO': { from: 'from-amber-500', to: 'to-amber-700', border: 'hover:border-amber-400' },
+  'GIUXE': { from: 'from-cyan-400', to: 'to-cyan-600', border: 'hover:border-cyan-400' },
+  'CHUKYSO': { from: 'from-gray-400', to: 'to-gray-600', border: 'hover:border-gray-400' },
+  'WEB': { from: 'from-pink-400', to: 'to-pink-600', border: 'hover:border-pink-400' },
+  'DUOC': { from: 'from-teal-400', to: 'to-teal-600', border: 'hover:border-teal-400' },
+  'CHAT': { from: 'from-slate-400', to: 'to-slate-600', border: 'hover:border-slate-400' },
+};
+
+const defaultColor = { from: 'from-blue-400', to: 'to-blue-600', border: 'hover:border-blue-400' };
+
+// Map category code to URL slug
+function categoryToSlug(maDanhMuc: string): string {
+  const mapping: Record<string, string> = {
+    'CAFE': 'phan-mem-ban-hang',
+    'KHACHSAN': 'phan-mem-khach-san',
+    'NHAHANG': 'phan-mem-nha-hang',
+    'QUANAN': 'phan-mem-quan-an',
+    'NHANSU': 'phan-mem-nhan-su',
+    'ERP': 'phan-mem-erp',
+    'VANTAI': 'phan-mem-van-tai-logistic',
+    'KHO': 'phan-mem-kho-pallet',
+    'GIUXE': 'phan-mem-quan-li-giu-xe',
+    'CHUKYSO': 'phan-mem-chu-ky-so',
+  };
+  return mapping[maDanhMuc] || `san-pham/${maDanhMuc.toLowerCase()}`;
+}
+
+// Static items that should always appear
+const staticItems = [
+  { maDanhMuc: 'WEB', tenDanhMuc: 'Thiết kế web', moTa: 'Website chuẩn UX/UI, tối ưu SEO', href: '/dich-vu-thiet-ke-web' },
+];
+
 export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    async function fetchCategories() {
+      try {
+        const response = await fetch('/api/proxy', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'username': 'admin',
+            'role': 'admin'
+          },
+          body: JSON.stringify({
+            table: 'sl_lv0006',
+            func: 'data',
+            code: 'admin',
+            token: 'rbA3RKvD1OJTF1DC'
+          })
+        });
+
+        if (!response.ok) throw new Error(`API error ${response.status}`);
+
+        const text = await response.text();
+        const cleanedText = text.trim().replace(/^\ufeff/, '');
+        const jsonMatch = cleanedText.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+        const data = JSON.parse(jsonMatch ? jsonMatch[0] : cleanedText);
+
+        const categoriesData = Array.isArray(data) ? data : (data.data || data.result || []);
+        setCategories(categoriesData);
+      } catch (err) {
+        console.error('Error fetching categories:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCategories();
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  // Combine API categories with static items
+  const allItems = [
+    ...categories.map(cat => ({
+      ...cat,
+      href: `/${categoryToSlug(cat.maDanhMuc)}`,
+      isFromApi: true,
+    })),
+    ...staticItems.filter(item => 
+      !categories.some(cat => cat.maDanhMuc === item.maDanhMuc)
+    ),
+  ];
 
   return (
     <>
@@ -44,7 +168,6 @@ export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
               maxHeight: '600px'
             }}
           >
-            {/* GIAO DIỆN MỚI - BỐ CỤC CARDS */}
             <div className="p-8">
               {/* Header */}
               <div className="text-center mb-6">
@@ -54,182 +177,47 @@ export const ProductDropdown = ({ isOpen, onClose }: ProductDropdownProps) => {
                 <p className="text-sm text-gray-600">Chọn phần mềm phù hợp với ngành nghề của bạn</p>
               </div>
 
-              {/* Grid 4 cột - Bố cục mới */}
-              <div className="grid grid-cols-4 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50">
-                {/* Card 1: Bán hàng */}
-                <a href="/phan-mem-ban-hang"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <ShoppingCart className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bán hàng</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Quản lý bán hàng chuyên nghiệp</p>
-                </a>
+              {/* Loading state */}
+              {loading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-6 h-6 animate-spin text-[#197dd3]" />
+                  <span className="ml-2 text-gray-600">Đang tải...</span>
+                </div>
+              ) : (
+                /* Grid */
+                <div className="grid grid-cols-4 gap-4 max-h-[450px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-50">
+                  {allItems.map((item, index) => {
+                    const Icon = categoryIcons[item.maDanhMuc] || LayoutGrid;
+                    const color = categoryColors[item.maDanhMuc] || defaultColor;
 
-                {/* Card 2: Siêu thị */}
-                <a href="/under-construction"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-green-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Store className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Siêu thị</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Giải pháp siêu thị mini</p>
-                </a>
+                    return (
+                      <a
+                        key={item.maDanhMuc || index}
+                        href={(item as any).href}
+                        className={`bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent ${color.border} group cursor-pointer`}
+                        onClick={onClose}
+                      >
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color.from} ${color.to} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                          <Icon className="w-6 h-6 text-white" />
+                        </div>
+                        <h4 className="font-bold text-gray-800 mb-1 text-sm">{item.tenDanhMuc}</h4>
+                        <p className="text-xs text-gray-500 line-clamp-2">{item.moTa || 'Giải pháp chuyên nghiệp'}</p>
+                      </a>
+                    );
+                  })}
 
-                {/* Card 3: Tạp hóa */}
-                <a href="/phan-mem-ban-hang"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Package className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Tạp hóa</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Dành cho cửa hàng nhỏ</p>
-                </a>
-
-                {/* Card 4: Cafe */}
-                <a href="/phan-mem-ban-hang"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-amber-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Coffee className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Quán Cafe</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">POS, order, kho nguyên liệu</p>
-                </a>
-
-                {/* Card 5: Nhà hàng */}
-                <a href="/under-construction"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-red-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Utensils className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Nhà hàng</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Quản lý bàn, bếp, bar</p>
-                </a>
-
-                {/* Card 6: Khách sạn */}
-                <a href="/phan-mem-khach-san"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-violet-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-400 to-violet-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Hotel className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Khách sạn</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Đặt phòng, check-in/out</p>
-                </a>
-
-                {/* Card 7: Thiết kế web */}
-                <a href="/dich-vu-thiet-ke-web"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-pink-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Thiết kế web</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Website chuẩn UX/UI, tối ưu SEO</p>
-                </a>
-
-                {/* Card 8: Vận tải */}
-                <a href="/phan-mem-van-tai-logistic"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-orange-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Truck className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Vận tải</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Đội xe, lộ trình</p>
-                </a>
-
-                {/* Card 9: Kho Pallet */}
-                <a href="/phan-mem-kho-pallet"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-amber-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Warehouse className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Kho Pallet</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Kho hàng chuyên nghiệp</p>
-                </a>
-
-                {/* Card 10: Bãi gửi xe */}
-                <a href="/phan-mem-quan-li-giu-xe"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-cyan-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Car className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Bãi gửi xe</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Bãi xe thông minh</p>
-                </a>
-
-                {/* Card 11: Nhân sự */}
-                <a href="/phan-mem-nhan-su"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-pink-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Nhân sự</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Chấm công, tính lương</p>
-                </a>
-
-                {/* Card 12: ERP */}
-                <a href="/phan-mem-erp"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-indigo-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Building2 className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">ERP</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Quản trị tổng thể</p>
-                </a>
-
-                {/* Card 13: Công ty dược */}
-                <a href="/under-construction"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-teal-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Pill className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Công ty dược</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Chuyên ngành dược phẩm</p>
-                </a>
-
-                {/* Card 14: Chat bảo mật */}
-                <a href="/under-construction"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-slate-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <MessageSquare className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Chat bảo mật</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Nhắn tin an toàn</p>
-                </a>
-
-                {/* Card 15: Chữ ký số */}
-                <a href="/sof_chukyso"
-                  className="bg-white rounded-xl p-4 hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-gray-400 group cursor-pointer"
-                  onClick={onClose}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                    <Lock className="w-6 h-6 text-white" />
-                  </div>
-                  <h4 className="font-bold text-gray-800 mb-1 text-sm">Chữ ký số</h4>
-                  <p className="text-xs text-gray-500 line-clamp-2">Ký số chuyên nghiệp</p>
-                </a>
-
-                {/* Card 16: Xem tất cả - CTA */}
-                <a href="http://sof.com.vn" target="_blank" rel="noopener noreferrer"
-                  className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
-                  onClick={onClose}>
-                  <LayoutGrid className="w-8 h-8 text-white mb-2" />
-                  <h4 className="font-bold text-white text-sm text-center">Xem tất cả</h4>
-                  <p className="text-xs text-white/80 text-center mt-1">→</p>
-                </a>
-              </div>
+                  {/* Xem tất cả - CTA */}
+                  <a
+                    href="/products"
+                    className="bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl p-4 hover:shadow-xl transition-all duration-300 hover:scale-105 group cursor-pointer flex flex-col items-center justify-center"
+                    onClick={onClose}
+                  >
+                    <LayoutGrid className="w-8 h-8 text-white mb-2" />
+                    <h4 className="font-bold text-white text-sm text-center">Xem tất cả</h4>
+                    <p className="text-xs text-white/80 text-center mt-1">→</p>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

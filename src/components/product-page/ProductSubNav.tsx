@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -30,27 +30,30 @@ interface NavItem {
   icon: React.ReactNode;
   exact?: boolean;
   onClick?: (event: React.MouseEvent) => void;
+  isAction?: boolean;
 }
 
 interface ProductSubNavProps {
   productSlug: string;
   productName?: string;
+  useAnchors?: boolean; // dùng anchor (#features/#pricing) cho trang one-page
 }
 
-export default function ProductSubNav({ productSlug, productName }: ProductSubNavProps) {
+export default function ProductSubNav({ productSlug, productName, useAnchors = false }: ProductSubNavProps) {
   const pathname = usePathname();
-  const basePath = `/${productSlug}`;
+  const basePath = productSlug.startsWith("/") ? productSlug : `/${productSlug}`;
   const { addItem } = useCart();
   const planOptions = getPlanOptions();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<PlanOption>("basic");
   const [error, setError] = useState<string | null>(null);
+  const [activeHref, setActiveHref] = useState(basePath);
 
-  const handleAddToCart = (event: React.MouseEvent) => {
+  const handleAddToCart = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     setIsDialogOpen(true);
-  };
+  }, []);
 
   const confirmAdd = () => {
     const productCode = buildProductCode(productSlug, selectedPlan);
@@ -70,42 +73,76 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
     }
   };
 
-  const navItems: NavItem[] = [
-    {
-      label: "Tổng quan",
-      href: basePath,
-      icon: <Home className="w-4 h-4" />,
-      exact: true,
-    },
-    {
-      label: "Tính năng",
-      href: `${basePath}/features`,
-      icon: <Sparkles className="w-4 h-4" />,
-    },
-    {
-      label: "Bảng giá",
-      href: productSlug === 'phan-mem-ban-hang' && pathname === basePath ? "#pricing" : `${basePath}/pricing`,
-      icon: <CreditCard className="w-4 h-4" />,
-    },
-    {
-      label: "Tài liệu",
-      href: `${basePath}/user-guide`,
-      icon: <FileText className="w-4 h-4" />,
-    },
-    {
-      label: "Thêm vào giỏ hàng",
-      href: "#add-to-cart",
-      icon: <ShoppingCart className="w-4 h-4" />,
-      onClick: handleAddToCart,
-    }
-  ];
+  const navItems = useMemo<NavItem[]>(
+    () => [
+      {
+        label: "Tổng quan",
+        href: basePath,
+        icon: <Home className="w-4 h-4" />,
+        exact: true,
+      },
+      {
+        label: "Tính năng",
+        href: useAnchors ? `${basePath}#features` : `${basePath}/features`,
+        icon: <Sparkles className="w-4 h-4" />,
+      },
+      {
+        label: "Bảng giá",
+        href: useAnchors ? `${basePath}#pricing` : `${basePath}/pricing`,
+        icon: <CreditCard className="w-4 h-4" />,
+      },
+      {
+        label: "Tài liệu",
+        href: useAnchors ? `${basePath}#faq` : `${basePath}/user-guide`,
+        icon: <FileText className="w-4 h-4" />,
+      },
+      {
+        label: "Thêm vào giỏ hàng",
+        href: "#add-to-cart",
+        icon: <ShoppingCart className="w-4 h-4" />,
+        onClick: handleAddToCart,
+        isAction: true,
+      },
+    ],
+    [basePath, handleAddToCart, useAnchors]
+  );
 
-  const isActive = (item: NavItem) => {
-    if (item.exact) {
-      return pathname === item.href;
+  useEffect(() => {
+    if (useAnchors) {
+      if (typeof window === "undefined") {
+        setActiveHref(basePath);
+        return;
+      }
+      const updateHash = () => {
+        const { hash } = window.location;
+        if (!hash) {
+          setActiveHref(basePath);
+          return;
+        }
+        const matchedAnchor = navItems.find(
+          (item) => !item.isAction && item.href.includes(hash)
+        );
+        setActiveHref(matchedAnchor?.href ?? basePath);
+      };
+      updateHash();
+      window.addEventListener("hashchange", updateHash);
+      return () => window.removeEventListener("hashchange", updateHash);
     }
-    return pathname.startsWith(item.href);
-  };
+
+    const matchedNav = navItems.find((item) => {
+      if (item.isAction || item.href.includes("#")) {
+        return false;
+      }
+      if (item.exact) {
+        return pathname === item.href;
+      }
+      return (
+        pathname === item.href || pathname.startsWith(`${item.href}/`)
+      );
+    });
+
+    setActiveHref(matchedNav?.href ?? basePath);
+  }, [pathname, useAnchors, basePath, navItems]);
 
   return (
     <nav
@@ -116,7 +153,7 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-1 py-1" role="menubar">
           {navItems.map((item) => {
-            const active = isActive(item);
+            const active = activeHref === item.href;
             return (
               <li key={item.href + item.label} role="none">
                 <Link
@@ -145,7 +182,7 @@ export default function ProductSubNav({ productSlug, productName }: ProductSubNa
         <div className="md:hidden overflow-x-auto scrollbar-hide py-2">
           <ul className="flex items-center gap-2 min-w-max" role="menubar">
             {navItems.map((item) => {
-              const active = isActive(item);
+              const active = activeHref === item.href;
               return (
                 <li key={item.href + item.label} role="none">
                   <Link

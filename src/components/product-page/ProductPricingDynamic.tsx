@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ProductPricing, ProductPricingComparison } from "./ProductPricing";
 
 // Default placeholder data structure for initial render
@@ -10,15 +10,20 @@ const PLACEHOLDER_PLANS = [
     { name: "Full", description: "Đang tải...", price: "...", features: ["Đang tải..."], cta: "Đăng ký", ctaLink: "#" }
 ];
 
-export function ProductPricingDynamic() {
-    // We still render the component structure so DOM elements exist
-    // but we won't use state for data binding to strictly follow "fetch data via js script" paradigm if insisted.
-    // However, for React compatibility, using state is much cleaner. 
-    // Code below implements the "Vanilla JS logic" inside useEffect.
+interface ProductPricingDynamicProps {
+    categoryCode?: string; // Mã loại sản phẩm (vd: CAFE, KHACHSAN, NHAHANG, QUANAN)
+}
+
+export function ProductPricingDynamic({ categoryCode = 'CAFE' }: ProductPricingDynamicProps) {
+    // Use ref to prevent duplicate fetches
+    const hasFetched = useRef(false);
 
     useEffect(() => {
-        // --- START LOGIC FROM template_static_fetch_data.js ---
-        const API_URL = '/api/proxy'; // Use proxy to avoid CORS
+        // Prevent duplicate fetch
+        if (hasFetched.current) return;
+        hasFetched.current = true;
+
+        const API_URL = '/api/proxy';
         const API_HEADERS = {
             'Content-Type': 'application/json',
             'username': 'admin',
@@ -33,6 +38,24 @@ export function ProductPricingDynamic() {
 
         const FALLBACK_TEXT = 'đang xử lý data';
         const CHECK_ICON = '<svg class="w-5 h-5 flex-shrink-0 text-green-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+        // Alias map cho category
+        const CATEGORY_VARIANTS: Record<string, string[]> = {
+            'CAFE': ['CAFE', 'CF'],
+            'KHACHSAN': ['KHACHSAN', 'KHACHS', 'KS', 'HOTEL'],
+            'NHAHANG': ['NHAHANG', 'NHAH', 'NH'],
+            'QUANAN': ['QUANAN', 'QA', 'QUAN', 'QUANANH'],
+            'ERP': ['ERP'],
+            'NHANSU': ['NHANSU', 'HR'],
+            'VANTAI': ['VANTAI', 'TMS'],
+            'KHO': ['KHO', 'WMS'],
+            'GIUXE': ['GIUXE', 'PARKING'],
+            'CHUKYSO': ['CHUKYSO', 'ESIGN'],
+            'WEB': ['WEB'],
+            'TOILET': ['TOILET'],
+        };
+
+        const variants = CATEGORY_VARIANTS[categoryCode.toUpperCase()] || [categoryCode.toUpperCase()];
 
         const fetchData = async () => {
             const pricingCards = Array.from(document.querySelectorAll('.pricing-card'));
@@ -62,22 +85,31 @@ export function ProductPricingDynamic() {
                 if (!data) return;
 
                 const productsRaw = Array.isArray(data) ? data : (data.data || data.result || [data]);
-                // 1. Filter CAFE
-                const cafeProducts = productsRaw.filter((p: any) => {
+                
+                // 1. Filter theo category aliases (loaiSanPham hoặc mã sản phẩm)
+                const filteredProducts = productsRaw.filter((p: any) => {
                     const code = (p.maSanPham || p.ma_san_pham || '').toString().toUpperCase();
-                    return code.includes('CAFE');
+                    const loai = (p.loaiSanPham || '').toString().toUpperCase();
+                    return variants.some(v => code.includes(v) || loai === v);
                 });
 
-                if (!cafeProducts.length) return;
+                if (!filteredProducts.length) return;
 
-                // 2. Map Slots
-                const plans = {
-                    basic: cafeProducts.find((p: any) => (p.maSanPham || '').includes('BS')),
-                    pro: cafeProducts.find((p: any) => (p.maSanPham || '').includes('PR')),
-                    full: cafeProducts.find((p: any) => (p.maSanPham || '').includes('FU'))
+                // 2. Map Slots - Remove duplicates by keeping only first match
+                const findUnique = (arr: any[], patterns: string[]) => {
+                    return arr.find((p: any) => {
+                        const code = (p.maSanPham || '').toUpperCase();
+                        return patterns.some(pt => code.includes(pt));
+                    });
                 };
 
-                // 3. Render Cards
+                const plans: { basic: any; pro: any; full: any } = {
+                    basic: findUnique(filteredProducts, ['.BS', 'BS']),
+                    pro: findUnique(filteredProducts, ['.PR', 'PR']),
+                    full: findUnique(filteredProducts, ['.FU', 'FU'])
+                };
+
+                // 3. Render Cards - Only hydrate if plan exists
                 if (pricingCards.length >= 3) {
                     if (plans.basic) hydrateCard(pricingCards[0], plans.basic);
                     if (plans.pro) hydrateCard(pricingCards[1], plans.pro);
@@ -102,17 +134,18 @@ export function ProductPricingDynamic() {
 
             if (titleEl) titleEl.textContent = product.tenSanPham || FALLBACK_TEXT;
 
-            if (priceEl && product.giaBan) {
+            if (priceEl && product.giaBan !== undefined) {
                 const price = Number(product.giaBan).toLocaleString('vi-VN');
                 const unit = product.donViTinhChinh || 'month';
-                // Use existing styles if possible or simple innerHTML
                 priceEl.innerHTML = `${price} <span class="text-base font-normal text-gray-500">/${unit}</span>`;
             }
 
             if (featureEl && product.nhaCungCap) {
                 const items = extractTextBlocks(product.nhaCungCap);
+                // Remove duplicates from features
+                const uniqueItems = [...new Set(items)];
                 featureEl.innerHTML = '';
-                items.forEach(text => {
+                uniqueItems.forEach(text => {
                     const li = document.createElement('li');
                     li.className = "flex items-center gap-3";
                     li.innerHTML = `${CHECK_ICON}<span class="text-gray-700">${text}</span>`;
@@ -146,23 +179,26 @@ export function ProductPricingDynamic() {
         function extractTextBlocks(html: string) {
             const doc = new DOMParser().parseFromString(html, 'text/html');
             const blocks: string[] = [];
+            const seen = new Set<string>(); // Track seen text to avoid duplicates
+            
             doc.querySelectorAll('li, p').forEach((node) => {
                 const text = node.textContent?.replace(/^[-•✔+\s]+/, '').trim();
-                if (text) blocks.push(text);
+                if (text && !seen.has(text)) {
+                    seen.add(text);
+                    blocks.push(text);
+                }
             });
             return blocks;
         }
 
         // Execute
         fetchData();
-        // --- END LOGIC ---
 
-    }, []);
+    }, [categoryCode]);
 
     return (
         <>
             <ProductPricing plans={PLACEHOLDER_PLANS} />
-            {/* Empty rows prop, will be populated by JS */}
             <ProductPricingComparison rows={[]} />
         </>
     );
