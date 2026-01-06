@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { companyInfo } from "@/constants/companyInfo";
 import Link from "next/link";
+import { buildProductCode, PlanOption } from "@/lib/cartCodes";
 import {
   Phone,
   Mail,
@@ -16,6 +17,13 @@ import {
   FileText,
   HelpCircle,
 } from "lucide-react";
+
+const DEFAULT_CONTACT_SLUG = "phan-mem-ban-hang";
+const CONTACT_SERVICE_CODES: Record<PlanOption, string> = {
+  basic: buildProductCode(DEFAULT_CONTACT_SLUG, "basic"),
+  pro: buildProductCode(DEFAULT_CONTACT_SLUG, "pro"),
+  full: buildProductCode(DEFAULT_CONTACT_SLUG, "full"),
+};
 
 export function ContactPageClient() {
   const searchParams = useSearchParams();
@@ -43,18 +51,14 @@ export function ContactPageClient() {
     endDate.setMonth(endDate.getMonth() + 1);
 
     // Handle URL parameters for service selection
-    const plan = searchParams.get("plan");
-    const planMapping: Record<string, string> = {
-      basic: "ONLINE.CAFE.BS.2025.V1",
-      pro: "ONLINE.CAFE.PR.2025.V1",
-      full: "ONLINE.CAFE.FU.2025.V1",
-    };
+    const plan = (searchParams.get("plan") || "").toLowerCase() as PlanOption | "";
+    const planCode = plan && CONTACT_SERVICE_CODES[plan as PlanOption] ? CONTACT_SERVICE_CODES[plan as PlanOption] : "";
 
     setFormData((prev) => ({
       ...prev,
       ngayLam: startDate.toISOString().split("T")[0],
       ngayKetThuc: endDate.toISOString().split("T")[0],
-      service: plan ? planMapping[plan.toLowerCase()] || "" : "",
+      service: planCode,
     }));
   }, [searchParams]);
 
@@ -408,9 +412,9 @@ export function ContactPageClient() {
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-white"
                     >
                       <option value="">-- Chọn gói dịch vụ --</option>
-                      <option value="ONLINE.CAFE.BS.2025.V1">Gói Basic</option>
-                      <option value="ONLINE.CAFE.PR.2025.V1">Gói Pro</option>
-                      <option value="ONLINE.CAFE.FU.2025.V1">Gói Full</option>
+                      <option value={CONTACT_SERVICE_CODES.basic}>Gói Basic</option>
+                      <option value={CONTACT_SERVICE_CODES.pro}>Gói Pro</option>
+                      <option value={CONTACT_SERVICE_CODES.full}>Gói Full</option>
                     </select>
                   </div>
 

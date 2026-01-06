@@ -22,7 +22,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { buildProductCode, getPlanOptions, PlanOption, planLabel } from "@/lib/cartCodes";
+import { buildProductCode, getPlanOptions, getServiceCodeFromSlug, PlanOption, planLabel } from "@/lib/cartCodes";
 
 interface NavItem {
   label: string;
@@ -49,6 +49,72 @@ export default function ProductSubNav({ productSlug, productName, useAnchors = f
   const [selectedPlan, setSelectedPlan] = useState<PlanOption>("basic");
   const [error, setError] = useState<string | null>(null);
   const [activeHref, setActiveHref] = useState(basePath);
+  const [planCodes, setPlanCodes] = useState<Partial<Record<PlanOption, string>>>({});
+  const serviceCode = useMemo(() => getServiceCodeFromSlug(productSlug), [productSlug]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const fetchPlanCodes = async () => {
+      if (!serviceCode) return;
+      try {
+        const response = await fetch("/api/proxy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            username: "admin",
+            role: "admin",
+          },
+          body: JSON.stringify({
+            table: "sl_lv0007",
+            func: "data",
+            code: "admin",
+            token: "rbA3RKvD1OJTF1DC",
+          }),
+        });
+
+        if (!response.ok) throw new Error(`API error ${response.status}`);
+
+        const text = await response.text();
+        const cleaned = text.trim().replace(/^[\ufeff]+/, "");
+        const match = cleaned.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+        const parsed = match ? JSON.parse(match[0]) : JSON.parse(cleaned);
+        const rows = Array.isArray(parsed) ? parsed : parsed?.data || parsed?.result || [];
+
+        const filtered = rows.filter((p: any) => {
+          const code = (p.maSanPham || p.ma_san_pham || "").toString().toUpperCase();
+          const type = (p.loaiSanPham || "").toString().toUpperCase();
+          return code.includes(serviceCode) || type === serviceCode;
+        });
+
+        const pickCode = (tier: string) => {
+          const hit = filtered.find((p: any) => {
+            const code = (p.maSanPham || "").toString().toUpperCase();
+            return code.includes(`.${tier}.`) || code.endsWith(tier);
+          });
+          return (hit && hit.maSanPham) || "";
+        };
+
+        const nextCodes: Partial<Record<PlanOption, string>> = {
+          basic: pickCode("BS"),
+          pro: pickCode("PR"),
+          full: pickCode("FU"),
+        };
+
+        if (!cancelled) {
+          setPlanCodes(nextCodes);
+        }
+      } catch (err) {
+        console.error("Load ERP product codes failed", err);
+        if (!cancelled) setPlanCodes({});
+      }
+    };
+
+    fetchPlanCodes();
+    return () => {
+      cancelled = true;
+    };
+  }, [serviceCode]);
 
   const handleAddToCart = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
@@ -56,7 +122,7 @@ export default function ProductSubNav({ productSlug, productName, useAnchors = f
   }, []);
 
   const confirmAdd = () => {
-    const productCode = buildProductCode(productSlug, selectedPlan);
+    const productCode = planCodes[selectedPlan] || buildProductCode(productSlug, selectedPlan);
     if (!productCode) {
       setError("Chưa cấu hình mã sản phẩm cho gói này. Liên hệ kỹ thuật.");
       return;
@@ -219,7 +285,7 @@ export default function ProductSubNav({ productSlug, productName, useAnchors = f
           </DialogHeader>
           <RadioGroup value={selectedPlan} onValueChange={(value) => setSelectedPlan(value as PlanOption)}>
             {planOptions.map((option) => {
-              const codePreview = buildProductCode(productSlug, option.value);
+              const codePreview = planCodes[option.value] || buildProductCode(productSlug, option.value);
               return (
                 <div key={option.value} className="flex items-start gap-3 rounded-lg border border-slate-200 p-3">
                   <RadioGroupItem value={option.value} id={`plan-${option.value}`} />
